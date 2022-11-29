@@ -1,4 +1,37 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="PrimaryColor">#0EBE5A</SolidColorBrush>
+    <SolidColorBrush x:Key="TextColor">#FFF</SolidColorBrush>
     
+    <CornerRadius x:Key="MainMenu.CTAButton.CornerRadius">10</CornerRadius>
+    <SolidColorBrush x:Key="MainMenu.CTAButton.Hover">#0BDB65</SolidColorBrush>
+    <SolidColorBrush x:Key="MainMenu.CTAButton.Pressed">#0E9A4A</SolidColorBrush>
+
+    <Style x:Key="MainMenu.CTAButton.Style" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="{StaticResource MainMenu.CTAButton.CornerRadius}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource MainMenu.CTAButton.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource MainMenu.CTAButton.Pressed}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
