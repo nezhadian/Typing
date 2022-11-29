@@ -9,6 +9,6 @@
       Title="LevelModePage">
 
     <Grid>
-        
+        <TextBlock Text="This Is Level Mode Page"/>
     </Grid>
 </Page>
