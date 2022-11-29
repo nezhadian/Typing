@@ -6,7 +6,6 @@
     <CornerRadius x:Key="MainMenu.CTAButton.CornerRadius">10</CornerRadius>
     <SolidColorBrush x:Key="MainMenu.CTAButton.Hover">#0BDB65</SolidColorBrush>
     <SolidColorBrush x:Key="MainMenu.CTAButton.Pressed">#0E9A4A</SolidColorBrush>
-
     <Style x:Key="MainMenu.CTAButton.Style" TargetType="Button">
         <Setter Property="Background" Value="{DynamicResource PrimaryColor}" />
         <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
@@ -27,6 +26,37 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="{DynamicResource MainMenu.CTAButton.Pressed}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="MainMenu.SecondButton.Normal">#B5FFD5</SolidColorBrush>
+    <SolidColorBrush x:Key="MainMenu.SecondButton.Text">#005324</SolidColorBrush>
+    <SolidColorBrush x:Key="MainMenu.SecondButton.Hover">#A4FFCB</SolidColorBrush>
+    <SolidColorBrush x:Key="MainMenu.SecondButton.Pressed">#7FF8B3</SolidColorBrush>
+    <Style x:Key="MainMenu.SecondButton.Style" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource MainMenu.SecondButton.Normal}" />
+        <Setter Property="Foreground" Value="{DynamicResource MainMenu.SecondButton.Text}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="{StaticResource MainMenu.CTAButton.CornerRadius}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource MainMenu.SecondButton.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource MainMenu.SecondButton.Pressed}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
