@@ -22,5 +22,15 @@ namespace Typing.Pages
         {
             InitializeComponent();
         }
+
+        private void GoToPageCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void GoToPageCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            NavigationService.Source = new Uri(e.Parameter as string, UriKind.Relative);
+        }
     }
 }
