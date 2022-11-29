@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:Typing"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <NavigationWindow ShowsNavigationUI="False" Source=""/>
-    </Grid>
+    <Frame NavigationUIVisibility="Hidden" Source="/Pages/MainPage.xaml"/>
 </Window>
