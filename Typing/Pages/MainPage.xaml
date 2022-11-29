@@ -9,6 +9,13 @@
       Title="MainPage">
 
     <Grid>
-        
+        <StackPanel Width="315" VerticalAlignment="Center">
+            <Button Height="100" Content="Level Mode"/>
+            <Button Height="100" Content="Free Mode" Margin="0,10,0,0"/>
+
+            <Button Height="50" Content="Stats" Margin="0,25,0,0"/>
+            <Button Height="50" Content="Options" Margin="0,7,0,0"/>
+            <Button Height="50" Content="About Me" Margin="0,7,0,0"/>
+        </StackPanel>
     </Grid>
 </Page>
