@@ -9,6 +9,7 @@
       Title="FreeModePage">
 
     <Grid>
-        
+        <TextBlock >Free Mode</TextBlock>
+
     </Grid>
 </Page>

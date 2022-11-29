@@ -9,6 +9,6 @@
       Title="AboutMePage">
 
     <Grid>
-        
+        <TextBlock >About Me</TextBlock>
     </Grid>
 </Page>

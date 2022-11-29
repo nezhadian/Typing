@@ -9,6 +9,6 @@
       Title="SettingsPage">
 
     <Grid>
-        
+        <TextBlock >Settings </TextBlock>
     </Grid>
 </Page>

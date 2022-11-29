@@ -9,6 +9,7 @@
       Title="StatsPage">
 
     <Grid>
-        
+        <TextBlock >Stats</TextBlock>
+
     </Grid>
 </Page>
