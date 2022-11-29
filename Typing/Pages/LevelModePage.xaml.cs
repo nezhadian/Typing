@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Typing.Pages
+namespace Typing
 {
     /// <summary>
     /// Interaction logic for LevelModePage.xaml
