@@ -110,5 +110,7 @@
         </Setter>
     </Style>
 
+    <SolidColorBrush x:Key="FreeMode.WPMText.TextColor">#00FF6F</SolidColorBrush>
+
 
 </ResourceDictionary>

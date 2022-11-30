@@ -8,8 +8,18 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="FreeModePage">
 
-    <Grid>
-        <TextBlock >Free Mode</TextBlock>
+    <Grid Margin="40,25">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <TextBlock HorizontalAlignment="Right" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
+                <Run FontSize="27" x:Name="txtWPM">27</Run>
+                <Run FontSize="16">WPM</Run>
+            </TextBlock>
+        </Grid>
 
     </Grid>
 </Page>
