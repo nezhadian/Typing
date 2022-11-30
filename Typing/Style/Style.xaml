@@ -111,6 +111,7 @@
     </Style>
 
     <SolidColorBrush x:Key="FreeMode.WPMText.TextColor">#00FF6F</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.Timer.TextColor">#00672D</SolidColorBrush>
 
 
 </ResourceDictionary>

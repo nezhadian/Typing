@@ -15,9 +15,13 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
-            <TextBlock HorizontalAlignment="Right" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
                 <Run FontSize="27" x:Name="txtWPM">27</Run>
                 <Run FontSize="16">WPM</Run>
+            </TextBlock>
+
+            <TextBlock x:Name="txtTimer" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.Timer.TextColor}" FontSize="24">
+                00:00:05
             </TextBlock>
         </Grid>
 
