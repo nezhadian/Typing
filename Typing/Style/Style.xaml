@@ -64,4 +64,51 @@
         </Setter>
     </Style>
 
+    <SolidColorBrush x:Key="Frame.BackButton.Hover">#EEEBEB</SolidColorBrush>
+    <SolidColorBrush x:Key="Frame.BackButton.Pressed">#D1D1D1</SolidColorBrush>
+    <Style x:Key="FrameBackButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Padding" Value="18" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Frame.BackButton.Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Frame.BackButton.Pressed}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+    <Style x:Key="MainFrameStyle" TargetType="Frame">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Frame">
+                    <Grid>
+                        <ContentPresenter x:Name="PART_FrameCP" />
+                        <Button x:Name="backBtn" Style="{StaticResource FrameBackButtonStyle}" Content="{StaticResource arrowBack}" HorizontalAlignment="Left" VerticalAlignment="Top" Command="NavigationCommands.BrowseBack" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="CanGoBack" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="backBtn"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>
