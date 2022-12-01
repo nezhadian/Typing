@@ -12,18 +12,34 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Grid >
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FreeMode.TypeText.DefaultStyle}">
+        <TextBlock x:Name="txtTyped" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
+                <Run>Hello.H</Run><!--
+             --><Run Style="{StaticResource FreeMode.TypedText.MistakeRun}">p</Run><!--
+             --><Run>w Are You ?</Run>
+                
+                <LineBreak/>
+                <Run >Hello.How Are Yo</Run><!--
+             --><Run Style="{StaticResource FreeMode.TypedText.MistakeRun}">i</Run><!--
+             --><Run >?</Run> 
+                
+                <LineBreak/>
+                <Run >Yasin Ebr</Run><!--
+             --><Run Style="{StaticResource FreeMode.TypedText.MistakeRun}">s</Run><!--
+             --><Run >him Nezhadian</Run>
+        </TextBlock>
+
+        <TextBlock x:Name="txtToType" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource FreeMode.TypeText.DefaultStyle}">
                 <Run Style="{StaticResource FreeMode.TypeText.TypedRun}">Hello.H</Run><!--
              --><Run Style="{StaticResource FreeMode.TypeText.MistakeRun}">p</Run><!--
              --><Run Style="{StaticResource FreeMode.TypeText.TypedRun}">w A</Run><!--
              --><Run>re You ?</Run>
-            </TextBlock>
-        </Grid>
-        
-        <Grid Grid.Row="1">
+        </TextBlock>
+
+        <Grid Grid.Row="3">
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
                 <Run FontSize="27" x:Name="txtWPM">27</Run>
                 <Run FontSize="16">WPM</Run>
