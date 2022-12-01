@@ -8,12 +8,7 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="FreeModePage">
 
-    <Page.CommandBindings>
-        <CommandBinding Command="local:GameCommands.PausePlayCommand" CanExecute="PausePlayCommand_CanExecute" Executed="PausePlayCommand_Executed"/>
-    </Page.CommandBindings>
-
     <Grid Margin="40,25">
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
@@ -28,7 +23,7 @@
                 00:00:05
             </TextBlock>
 
-            <ToggleButton Style="{StaticResource FreeMode.PausePlayButton.Style}" Command="local:GameCommands.PausePlayCommand"/>
+            <ToggleButton Style="{StaticResource FreeMode.PausePlayButton.Style}"/>
         </Grid>
 
     </Grid>

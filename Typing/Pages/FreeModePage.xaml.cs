@@ -21,30 +21,6 @@ namespace Typing.Pages
         public FreeModePage()
         {
             InitializeComponent();
-            
         }
-
-        private void PausePlayCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = sender is FreeModePage;
-        }
-
-        private void PausePlayCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            MessageBox.Show("Test");
-        }
-    }
-    public static class GameCommands
-    {
-        public static readonly RoutedUICommand PausePlayCommand = new RoutedUICommand
-            (
-                "PausePlayCommand",
-                "PausePlayCommand",
-                typeof(GameCommands),
-                new InputGestureCollection()
-                {
-                    new KeyGesture(Key.Escape)
-                }
-            );
     }
 }
