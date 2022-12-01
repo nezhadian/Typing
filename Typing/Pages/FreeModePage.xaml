@@ -13,6 +13,16 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+
+        <Grid >
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FreeMode.TypeText.DefaultStyle}">
+                <Run Style="{StaticResource FreeMode.TypeText.TypedRun}">Hello.H</Run><!--
+             --><Run Style="{StaticResource FreeMode.TypeText.MistakeRun}">p</Run><!--
+             --><Run Style="{StaticResource FreeMode.TypeText.TypedRun}">w A</Run><!--
+             --><Run>re You ?</Run>
+            </TextBlock>
+        </Grid>
+        
         <Grid Grid.Row="1">
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
                 <Run FontSize="27" x:Name="txtWPM">27</Run>

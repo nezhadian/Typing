@@ -142,5 +142,22 @@
         </Setter>
     </Style>
 
+    <SolidColorBrush x:Key="FreeMode.TypeText.NonTypedColor">#b3b3b3</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.TypeText.TypedColor">#333</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.TypeText.MistakeColor">#ff0000</SolidColorBrush>
+    <Style x:Key="FreeMode.TypeText.DefaultStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypeText.NonTypedColor}" />
+    </Style>
+    <Style x:Key="FreeMode.TypeText.TypedRun" TargetType="Run">
+        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypeText.TypedColor}" />
+    </Style>
+    <Style x:Key="FreeMode.TypeText.MistakeRun" TargetType="Run">
+        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypeText.MistakeColor}" />
+        <Setter Property="TextDecorations" Value="Underline" />
+    </Style>
+
 
 </ResourceDictionary>
