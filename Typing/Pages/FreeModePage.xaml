@@ -8,6 +8,10 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="FreeModePage">
 
+    <Page.CommandBindings>
+        <CommandBinding Command="local:GameCommands.PausePlayCommand" CanExecute="PausePlayCommand_CanExecute" Executed="PausePlayCommand_Executed"/>
+    </Page.CommandBindings>
+
     <Grid Margin="40,25">
 
         <Grid.RowDefinitions>
@@ -23,6 +27,8 @@
             <TextBlock x:Name="txtTimer" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.Timer.TextColor}" FontSize="24">
                 00:00:05
             </TextBlock>
+
+            <ToggleButton Style="{StaticResource FreeMode.PausePlayButton.Style}" Command="local:GameCommands.PausePlayCommand"/>
         </Grid>
 
     </Grid>
