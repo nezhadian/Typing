@@ -160,15 +160,14 @@
     </Style>
     
     <!--Free Mode Preview Text Style-->
-    <SolidColorBrush x:Key="FreeMode.MainLine.PreviewColor">#b3b3b3</SolidColorBrush>
-    <SolidColorBrush x:Key="FreeMode.MainLine.CaretBorder">#666</SolidColorBrush>
-    <SolidColorBrush x:Key="FreeMode.MainLine.CaretBg">#ccc</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.MainLine.PreviewColor">#ccc</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.MainLine.CaretBorder">#ccc</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.MainLine.CaretBg">#eee</SolidColorBrush>
     
     <Style x:Key="FreeMode.MainLine.Preview" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
         <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.PreviewColor}" />
     </Style>
     <Style x:Key="FreeMode.MainLine.Caret" TargetType="Border">
-        <Setter Property="MinWidth" Value="15" />
         <Setter Property="Background" Value="{DynamicResource FreeMode.MainLine.CaretBg}" />
         <Setter Property="BorderBrush" Value="{DynamicResource FreeMode.MainLine.CaretBorder}" />
         <Setter Property="BorderThickness" Value="1" />

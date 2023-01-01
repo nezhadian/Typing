@@ -44,7 +44,7 @@
                  --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
                  --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w A</Run>
                 </TextBlock>
-                <Border MinWidth="15" Background="Gainsboro" BorderBrush="Gray" BorderThickness="1">
+                <Border Style="{StaticResource FreeMode.MainLine.Caret}">
                     <TextBlock x:Name="txtCaretChar" HorizontalAlignment="Center" Text="r" Style="{StaticResource FreeMode.MainLine.Preview}"/>
                 </Border>
                 <TextBlock x:Name="txtPreview" Text="e You ?" Style="{StaticResource FreeMode.MainLine.Preview}"/>
