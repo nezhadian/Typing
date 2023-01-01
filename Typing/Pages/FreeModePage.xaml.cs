@@ -68,7 +68,8 @@ namespace Typing.Pages
                     break;
                 default:
                     char? initChar = USKeyboard.Key2Char(e.Key, isToggled);
-                    if(initChar != null)
+                    bool isEndOfLine = TypingIndex >= currecntLine.Length;
+                    if (initChar != null && !isEndOfLine)
                     {
                         char keyChar = initChar.Value;
                         AddChar(keyChar);
