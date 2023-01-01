@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Typing.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="FreeModePage">
 
     <Grid Margin="40,25">
