@@ -151,6 +151,7 @@
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontFamily" Value="Poppins" />
         <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="TextAlignment" Value="Left" />
     </Style>
     <Style x:Key="FreeMode.MainLine.Correct" TargetType="Run">
         <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.CorrectColor}" />
@@ -165,7 +166,6 @@
     <!--FreeMode Previsly Typed Text Style-->
     <Style x:Key="FreeMode.TypedText.DefaultStyle" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="Opacity" Value="0.7" />
     </Style>
 

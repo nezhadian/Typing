@@ -13,35 +13,41 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="txtTyped" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
+        <Grid HorizontalAlignment="Center" MinWidth="550">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="txtTyped" VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
                 <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
              --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
              --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
-            <LineBreak />
+                <LineBreak />
             
                 <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
              --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
              --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
             
-            <LineBreak />
+                <LineBreak />
                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
              --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
              --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
-        </TextBlock>
+            </TextBlock>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBlock x:Name="txtCurrentTypedLine" Style="{StaticResource FreeMode.MainLine.BaseStyle}">
+            <StackPanel Orientation="Horizontal" Grid.Row="1"  VerticalAlignment="Top">
+                <TextBlock x:Name="txtCurrentTypedLine" Style="{StaticResource FreeMode.MainLine.BaseStyle}">
                 <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
              --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
              --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w A</Run>
-            </TextBlock>
-            <TextBlock x:Name="txtPreview" Text="re You ?" Style="{StaticResource FreeMode.MainLine.Preview}"/>
-        </StackPanel>
-
+                </TextBlock>
+                <TextBlock x:Name="txtPreview" Text="re You ?" Style="{StaticResource FreeMode.MainLine.Preview}"/>
+            </StackPanel>
+        </Grid>
+        
         <Grid Grid.Row="3">
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
                 <Run FontSize="27" x:Name="txtWPM">27</Run>
