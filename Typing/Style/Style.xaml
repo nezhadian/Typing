@@ -161,21 +161,12 @@
     <Style x:Key="FreeMode.MainLine.Preview" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
         <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.PreviewColor}" />
     </Style>
-
-
-    <SolidColorBrush x:Key="FreeMode.TypedText.Color">#aaa</SolidColorBrush>
-    <SolidColorBrush x:Key="FreeMode.TypedText.MistakeColor">#FC9C9C</SolidColorBrush>
-    <Style x:Key="FreeMode.TypedText.DefaultStyle" TargetType="TextBlock">
+    
+    <!--FreeMode Previsly Typed Text Style-->
+    <Style x:Key="FreeMode.TypedText.DefaultStyle" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="FontFamily" Value="Poppins" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypedText.Color}" />
         <Setter Property="TextAlignment" Value="Center" />
-        <Setter Property="Opacity" Value="0.5" />
-    </Style>
-    <Style x:Key="FreeMode.TypedText.MistakeRun" TargetType="Run">
-        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypedText.MistakeColor}" />
-        <Setter Property="TextDecorations" Value="Underline" />
+        <Setter Property="Opacity" Value="0.7" />
     </Style>
 
 

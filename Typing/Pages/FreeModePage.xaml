@@ -17,19 +17,19 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="txtTyped" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
-                <Run>Hello.H</Run><!--
-             --><Run Style="{StaticResource FreeMode.TypedText.MistakeRun}">p</Run><!--
-             --><Run>w Are You ?</Run>
-                
-                <LineBreak/>
-                <Run >Hello.How Are Yo</Run><!--
-             --><Run Style="{StaticResource FreeMode.TypedText.MistakeRun}">i</Run><!--
-             --><Run >?</Run> 
-                
-                <LineBreak/>
-                <Run >Yasin Ebr</Run><!--
-             --><Run Style="{StaticResource FreeMode.TypedText.MistakeRun}">s</Run><!--
-             --><Run >him Nezhadian</Run>
+                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
+            <LineBreak />
+            
+                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
+            
+            <LineBreak />
+               <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
         </TextBlock>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
