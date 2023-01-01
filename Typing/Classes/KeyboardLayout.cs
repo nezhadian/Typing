@@ -41,6 +41,11 @@ namespace Typing
 
             //Space
             {Key.Space,(' ',' ') },
+            //OEMs
+            {Key.Oem1,(';',':') },
+            {Key.Oem2,('/','?') },
+            {Key.Oem7,('\'','"') },
+            {Key.OemComma,(',','<') },
         };
 
         public char? Key2Char(Key key, bool isToggled)
