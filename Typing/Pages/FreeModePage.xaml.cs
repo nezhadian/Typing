@@ -21,7 +21,7 @@ namespace Typing.Pages
     {
         KeyboardLayout USKeyboard = new KeyboardLayout();
         public StreamReader TextToBeTyped;
-        string currentLine;
+        string currecntLine;
         private int _tIndex;
 
         public int TypingIndex
@@ -29,7 +29,7 @@ namespace Typing.Pages
             get { return _tIndex; }
             set { 
                 _tIndex = value;
-                txtPreview.Text = currentLine.Substring(value);
+                txtPreview.Text = currecntLine.Substring(value);
             }
         }
 
@@ -42,33 +42,15 @@ namespace Typing.Pages
         {
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
             TextToBeTyped = File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt");
-            GoToFirstLine();
-        }
-
-        private void GoToFirstLine()
-        {
-            txtCurrentTypedLine.Text = "";
-            TextToBeTyped.BaseStream.Seek(0, SeekOrigin.Begin);
-            currentLine = TextToBeTyped.ReadLine();
-            TypingIndex = 0;
+            GoToNextLine();
         }
 
         private bool GoToNextLine()
         {
-            string line = TextToBeTyped.ReadLine();
-            if (line != null)
-            {
-                currentLine = line;
-                txtCurrentTypedLine.Text = "";
-                TypingIndex = 0;
-                return true;
-            }
-            else
-            {
-                txtCurrentTypedLine.Text = "";
-                currentLine = "";
-                return false;
-            }
+            txtCurrentTypedLine.Text = "";
+            currecntLine = TextToBeTyped.ReadLine();
+            TypingIndex = 0;
+            return currecntLine != null;
 
         }
 
@@ -79,18 +61,14 @@ namespace Typing.Pages
             switch (e.Key)
             {
                 case Key.Enter:
-                    if(TypingIndex >= currentLine.Length)
+                    if(TypingIndex >= currecntLine.Length)
                     {
-                        bool noNextLine = !GoToNextLine();
-                        if (noNextLine)
-                        {
-                            MessageBox.Show("Congratulations!!! You typed all of text");
-                        }
+                        GoToNextLine();
                     }
                     break;
                 default:
                     char? initChar = USKeyboard.Key2Char(e.Key, isToggled);
-                    bool isEndOfLine = TypingIndex >= currentLine.Length;
+                    bool isEndOfLine = TypingIndex >= currecntLine.Length;
                     if (initChar != null && !isEndOfLine)
                     {
                         char keyChar = initChar.Value;
@@ -103,10 +81,10 @@ namespace Typing.Pages
 
         private void AddChar(char keyChar)
         {
-            if (TypingIndex >= currentLine.Length)
+            if (TypingIndex >= currecntLine.Length)
                 return;
 
-            char correctChar = currentLine[TypingIndex];
+            char correctChar = currecntLine[TypingIndex];
             if(keyChar == correctChar)
             {
                 AddCorrectChar(keyChar);
