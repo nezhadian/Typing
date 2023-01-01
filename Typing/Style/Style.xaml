@@ -142,21 +142,24 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="FreeMode.TypeText.NonTypedColor">#b3b3b3</SolidColorBrush>
-    <SolidColorBrush x:Key="FreeMode.TypeText.TypedColor">#333</SolidColorBrush>
-    <SolidColorBrush x:Key="FreeMode.TypeText.MistakeColor">#ff0000</SolidColorBrush>
-    <Style x:Key="FreeMode.TypeText.DefaultStyle" TargetType="TextBlock">
+    
+    <!--FreeMode Main Line Style-->
+    <SolidColorBrush x:Key="FreeMode.MainLine.PreviewColor">#b3b3b3</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.MainLine.CorrectColor">#333</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.MainLine.MistakeColor">#ff0000</SolidColorBrush>
+    <Style x:Key="FreeMode.MainLine.BaseStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontFamily" Value="Poppins" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypeText.NonTypedColor}" />
     </Style>
-    <Style x:Key="FreeMode.TypeText.TypedRun" TargetType="Run">
-        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypeText.TypedColor}" />
+    <Style x:Key="FreeMode.MainLine.Correct" TargetType="Run">
+        <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.CorrectColor}" />
     </Style>
-    <Style x:Key="FreeMode.TypeText.MistakeRun" TargetType="Run">
-        <Setter Property="Foreground" Value="{DynamicResource FreeMode.TypeText.MistakeColor}" />
-        <Setter Property="TextDecorations" Value="Underline" />
+    <Style x:Key="FreeMode.MainLine.Mistake" TargetType="Underline">
+        <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.MistakeColor}" />
+    </Style>
+    <Style x:Key="FreeMode.MainLine.Preview" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.PreviewColor}" />
     </Style>
 
 
