@@ -49,8 +49,11 @@ namespace Typing.Pages
         private void GoToFirstLine()
         {
             txtCurrentTypedLine.Text = "";
+            txtTyped.Text = "";
+
             TextToBeTyped.BaseStream.Seek(0, SeekOrigin.Begin);
             currentLine = TextToBeTyped.ReadLine();
+
             TypingIndex = 0;
         }
 
@@ -59,6 +62,7 @@ namespace Typing.Pages
             string line = TextToBeTyped.ReadLine();
             if (line != null)
             {
+                AddCurrentLineToTypedText();
                 currentLine = line;
                 txtCurrentTypedLine.Text = "";
                 TypingIndex = 0;
@@ -66,11 +70,26 @@ namespace Typing.Pages
             }
             else
             {
-                txtCurrentTypedLine.Text = "";
                 currentLine = "";
                 return false;
             }
 
+        }
+
+        private void AddCurrentLineToTypedText()
+        {
+            Inline[] inlines = new Inline[500];
+            txtCurrentTypedLine.Inlines.CopyTo(inlines, 0);
+
+            if(txtTyped.Text != "")
+                txtTyped.Inlines.Add(new LineBreak());
+
+            foreach (Inline inline in inlines)
+            {
+                if(inline != null)
+                    txtTyped.Inlines.Add(inline);
+            }
+            
         }
 
         private void FreeModePage_KeyDown(object sender, KeyEventArgs e)
