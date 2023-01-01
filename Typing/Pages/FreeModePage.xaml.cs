@@ -30,7 +30,11 @@ namespace Typing.Pages
             set
             {
                 _tIndex = value;
-                txtPreview.Text = currentLine.Substring(value);
+
+                txtCaretChar.Text = value < currentLine.Length ? currentLine[value].ToString() : "";
+
+                int previewIndex = value + 1;
+                txtPreview.Text = previewIndex < currentLine.Length ? currentLine.Substring(previewIndex) : "";
             }
         }
 
