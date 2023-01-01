@@ -87,15 +87,15 @@ namespace Typing.Pages
             char correctChar = currecntLine[TypingIndex];
             if(keyChar == correctChar)
             {
-                AddCorrect(keyChar);
+                AddCorrectChar(keyChar);
             }
             else
             {
-                AddInCorrect(keyChar);
+                AddInCorrectChar(keyChar);
             }
         }
 
-        private void AddInCorrect(char keyChar)
+        private void AddInCorrectChar(char keyChar)
         {
             object lastInline = txtCurrentTypedLine.Inlines.LastInline;
             //Run is used for correct Piece and Underline is used for InCorrect Piece
@@ -105,7 +105,7 @@ namespace Typing.Pages
                 Run LastRunInUnderline = (Run)lastInCorrectPiece.Inlines.LastInline;
                 LastRunInUnderline.Text += keyChar;
             }
-            else if (lastInline is Run)
+            else
             {
                 Underline newIncorrectPiece = new Underline()
                 {
@@ -117,7 +117,7 @@ namespace Typing.Pages
             }
         }
 
-        private void AddCorrect(char keyChar)
+        private void AddCorrectChar(char keyChar)
         {
             object lastInline = txtCurrentTypedLine.Inlines.LastInline;
             //Run is used for correct Piece and Underline is used for InCorrect Piece
@@ -126,7 +126,7 @@ namespace Typing.Pages
                 Run lastTextPiece = (Run)lastInline;
                 lastTextPiece.Text += keyChar;
             }
-            else if (lastInline is Underline)
+            else
             {
                 Run newTextPiece = new Run()
                 {
