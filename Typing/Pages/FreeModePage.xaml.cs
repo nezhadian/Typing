@@ -21,7 +21,9 @@ namespace Typing.Pages
     {
         KeyboardLayout USKeyboard = new KeyboardLayout();
         public StreamReader TextToBeTyped;
+        string currecntLine;
         private int _tIndex;
+
         public int TypingIndex
         {
             get { return _tIndex; }
@@ -30,7 +32,6 @@ namespace Typing.Pages
                 txtPreview.Text = currecntLine.Substring(value);
             }
         }
-        string currecntLine;
 
         public FreeModePage()
         {
@@ -41,33 +42,15 @@ namespace Typing.Pages
         {
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
             TextToBeTyped = File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt");
-            GoToFirstLine();
-        }
-
-        private void GoToFirstLine()
-        {
-            txtCurrentTypedLine.Text = "";
-            TextToBeTyped.BaseStream.Seek(0, SeekOrigin.Begin);
-            currecntLine = TextToBeTyped.ReadLine();
-            TypingIndex = 0;
+            GoToNextLine();
         }
 
         private bool GoToNextLine()
         {
-            string line = TextToBeTyped.ReadLine();
-            if(line != null)
-            {
-                currecntLine = line;
-                txtCurrentTypedLine.Text = "";
-                TypingIndex = 0;
-                return true;
-            }
-            else
-            {
-                txtCurrentTypedLine.Text = "";
-                currecntLine = "";
-                return false;
-            }
+            txtCurrentTypedLine.Text = "";
+            currecntLine = TextToBeTyped.ReadLine();
+            TypingIndex = 0;
+            return currecntLine != null;
 
         }
 
@@ -80,17 +63,12 @@ namespace Typing.Pages
                 case Key.Enter:
                     if(TypingIndex >= currecntLine.Length)
                     {
-                        bool noNextLine = !GoToNextLine();
-                        if (noNextLine)
-                        {
-                            MessageBox.Show("Congratulations!!! You typed all of text");
-                        }
+                        GoToNextLine();
                     }
                     break;
                 default:
                     char? initChar = USKeyboard.Key2Char(e.Key, isToggled);
-                    bool isEndOfLine = TypingIndex >= currecntLine.Length;
-                    if(initChar != null && !isEndOfLine)
+                    if(initChar != null)
                     {
                         char keyChar = initChar.Value;
                         AddChar(keyChar);
@@ -102,18 +80,21 @@ namespace Typing.Pages
 
         private void AddChar(char keyChar)
         {
+            if (TypingIndex >= currecntLine.Length)
+                return;
+
             char correctChar = currecntLine[TypingIndex];
             if(keyChar == correctChar)
             {
-                AddCorrectChar(keyChar);
+                AddCorrect(keyChar);
             }
             else
             {
-                AddInCorrectChar(keyChar);
+                AddInCorrect(keyChar);
             }
         }
 
-        private void AddInCorrectChar(char keyChar)
+        private void AddInCorrect(char keyChar)
         {
             object lastInline = txtCurrentTypedLine.Inlines.LastInline;
             //Run is used for correct Piece and Underline is used for InCorrect Piece
@@ -123,18 +104,19 @@ namespace Typing.Pages
                 Run LastRunInUnderline = (Run)lastInCorrectPiece.Inlines.LastInline;
                 LastRunInUnderline.Text += keyChar;
             }
-            else
+            else if (lastInline is Run)
             {
-                Run TextPiece = new Run(keyChar.ToString());
-                Underline newIncorrectPiece = new Underline(TextPiece)
+                Underline newIncorrectPiece = new Underline()
                 {
                     Style = (Style)App.Current.FindResource("FreeMode.MainLine.Mistake")
                 };
+                Run TextPiece = new Run(keyChar.ToString());
+                newIncorrectPiece.Inlines.Add(TextPiece);
                 txtCurrentTypedLine.Inlines.Add(newIncorrectPiece);
             }
         }
 
-        private void AddCorrectChar(char keyChar)
+        private void AddCorrect(char keyChar)
         {
             object lastInline = txtCurrentTypedLine.Inlines.LastInline;
             //Run is used for correct Piece and Underline is used for InCorrect Piece
@@ -143,7 +125,7 @@ namespace Typing.Pages
                 Run lastTextPiece = (Run)lastInline;
                 lastTextPiece.Text += keyChar;
             }
-            else
+            else if (lastInline is Underline)
             {
                 Run newTextPiece = new Run()
                 {
