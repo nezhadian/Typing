@@ -177,7 +177,7 @@
     <!--FreeMode Previsly Typed Text Style-->
     <Style x:Key="FreeMode.TypedText.DefaultStyle" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="Opacity" Value="0.5" />
     </Style>
     
 

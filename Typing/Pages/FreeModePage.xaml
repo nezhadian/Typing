@@ -15,14 +15,14 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Grid HorizontalAlignment="Center" MinWidth="550">
+        <Grid HorizontalAlignment="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock x:Name="txtTyped" VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
+            <TextBlock x:Name="txtTyped"  VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
                 <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
              --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
              --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
@@ -38,7 +38,7 @@
              --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
             </TextBlock>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="1"  VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top">
                 <TextBlock x:Name="txtCurrentTypedLine" Style="{StaticResource FreeMode.MainLine.BaseStyle}">
                     <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
                  --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
