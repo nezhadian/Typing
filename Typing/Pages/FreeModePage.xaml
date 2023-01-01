@@ -40,11 +40,14 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="1"  VerticalAlignment="Top">
                 <TextBlock x:Name="txtCurrentTypedLine" Style="{StaticResource FreeMode.MainLine.BaseStyle}">
-                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
-             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
-             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w A</Run>
+                    <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+                 --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+                 --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w A</Run>
                 </TextBlock>
-                <TextBlock x:Name="txtPreview" Text="re You ?" Style="{StaticResource FreeMode.MainLine.Preview}"/>
+                <Border MinWidth="15" Background="Gainsboro" BorderBrush="Gray" BorderThickness="1">
+                    <TextBlock x:Name="txtCaretChar" HorizontalAlignment="Center" Text="r" Style="{StaticResource FreeMode.MainLine.Preview}"/>
+                </Border>
+                <TextBlock x:Name="txtPreview" Text="e You ?" Style="{StaticResource FreeMode.MainLine.Preview}"/>
             </StackPanel>
         </Grid>
         

@@ -144,7 +144,6 @@
 
     
     <!--FreeMode Main Line Style-->
-    <SolidColorBrush x:Key="FreeMode.MainLine.PreviewColor">#b3b3b3</SolidColorBrush>
     <SolidColorBrush x:Key="FreeMode.MainLine.CorrectColor">#333</SolidColorBrush>
     <SolidColorBrush x:Key="FreeMode.MainLine.MistakeColor">#ff0000</SolidColorBrush>
     <Style x:Key="FreeMode.MainLine.BaseStyle" TargetType="TextBlock">
@@ -159,15 +158,29 @@
     <Style x:Key="FreeMode.MainLine.Mistake" TargetType="Underline">
         <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.MistakeColor}" />
     </Style>
+    
+    <!--Free Mode Preview Text Style-->
+    <SolidColorBrush x:Key="FreeMode.MainLine.PreviewColor">#b3b3b3</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.MainLine.CaretBorder">#666</SolidColorBrush>
+    <SolidColorBrush x:Key="FreeMode.MainLine.CaretBg">#ccc</SolidColorBrush>
+    
     <Style x:Key="FreeMode.MainLine.Preview" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
         <Setter Property="Foreground" Value="{DynamicResource FreeMode.MainLine.PreviewColor}" />
     </Style>
+    <Style x:Key="FreeMode.MainLine.Caret" TargetType="Border">
+        <Setter Property="MinWidth" Value="15" />
+        <Setter Property="Background" Value="{DynamicResource FreeMode.MainLine.CaretBg}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource FreeMode.MainLine.CaretBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    
     
     <!--FreeMode Previsly Typed Text Style-->
     <Style x:Key="FreeMode.TypedText.DefaultStyle" TargetType="TextBlock" BasedOn="{StaticResource FreeMode.MainLine.BaseStyle}">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Opacity" Value="0.7" />
     </Style>
+    
 
 
 </ResourceDictionary>
