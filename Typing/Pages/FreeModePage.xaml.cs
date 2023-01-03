@@ -22,8 +22,8 @@ namespace Typing.Pages
         KeyboardLayout USKeyboard = new KeyboardLayout();
         public StreamReader TextToBeTyped;
         string currentLine;
-        private int _tIndex;
 
+        private int _tIndex;
         public int TypingIndex
         {
             get { return _tIndex; }
@@ -48,6 +48,35 @@ namespace Typing.Pages
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
             TextToBeTyped = File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt");
             GoToFirstLine();
+        }
+
+        private void FreeModePage_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool isToggled = !Console.CapsLock;
+            isToggled = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.LeftShift) ? !isToggled : isToggled;
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    if (TypingIndex >= currentLine.Length)
+                    {
+                        bool noNextLine = !GoToNextLine();
+                        if (noNextLine)
+                        {
+                            MessageBox.Show("Congratulations!!! You typed all of text");
+                        }
+                    }
+                    break;
+                default:
+                    char? initChar = USKeyboard.Key2Char(e.Key, isToggled);
+                    bool isCharRemained = TypingIndex < currentLine.Length;
+                    if (initChar != null && isCharRemained)
+                    {
+                        char keyChar = initChar.Value;
+                        AddChar(keyChar);
+                        TypingIndex++;
+                    }
+                    break;
+            }
         }
 
         private void GoToFirstLine()
@@ -82,54 +111,24 @@ namespace Typing.Pages
 
         private void AddCurrentLineToTypedText()
         {
-            Inline[] inlines = new Inline[500];
-            txtCurrentTypedLine.Inlines.CopyTo(inlines, 0);
+            Inline[] inlineList = new Inline[500];
+            txtCurrentTypedLine.Inlines.CopyTo(inlineList, 0);
 
             if(txtTyped.Text != "")
                 txtTyped.Inlines.Add(new LineBreak());
 
-            foreach (Inline inline in inlines)
+            foreach (Inline inline in inlineList)
             {
-                if(inline != null)
+                if (inline != null)
                     txtTyped.Inlines.Add(inline);
+                else
+                    break;
             }
             
         }
 
-        private void FreeModePage_KeyDown(object sender, KeyEventArgs e)
-        {
-            bool isToggled = !Console.CapsLock;
-            isToggled = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.LeftShift) ? !isToggled : isToggled;
-            switch (e.Key)
-            {
-                case Key.Enter:
-                    if (TypingIndex >= currentLine.Length)
-                    {
-                        bool noNextLine = !GoToNextLine();
-                        if (noNextLine)
-                        {
-                            MessageBox.Show("Congratulations!!! You typed all of text");
-                        }
-                    }
-                    break;
-                default:
-                    char? initChar = USKeyboard.Key2Char(e.Key, isToggled);
-                    bool isEndOfLine = TypingIndex >= currentLine.Length;
-                    if (initChar != null && !isEndOfLine)
-                    {
-                        char keyChar = initChar.Value;
-                        AddChar(keyChar);
-                        TypingIndex++;
-                    }
-                    break;
-            }
-        }
-
         private void AddChar(char keyChar)
         {
-            if (TypingIndex >= currentLine.Length)
-                return;
-
             char correctChar = currentLine[TypingIndex];
             if (keyChar == correctChar)
             {
