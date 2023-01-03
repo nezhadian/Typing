@@ -20,23 +20,7 @@ namespace Typing.Pages
     public partial class FreeModePage : Page
     {
         KeyboardLayout USKeyboard = new KeyboardLayout();
-        public StreamReader TextToBeTyped;
-        string currentLine;
-
-        private int _tIndex;
-        public int TypingIndex
-        {
-            get { return _tIndex; }
-            set
-            {
-                _tIndex = value;
-
-                txtCaretChar.Text = value < currentLine.Length ? currentLine[value].ToString() : "";
-
-                int previewIndex = value + 1;
-                txtPreview.Text = previewIndex < currentLine.Length ? currentLine.Substring(previewIndex) : "";
-            }
-        }
+        TypingStream TypingStream;
 
         public FreeModePage()
         {
@@ -46,8 +30,16 @@ namespace Typing.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
-            TextToBeTyped = File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt");
-            GoToFirstLine();
+            CleanAll();
+            TypingStream = new TypingStream(File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt"));
+            TypingStream.OnCharTyped += TypingStream_OnCharTyped;
+            TypingStream.GoToFirstLine();
+        }
+
+        private void TypingStream_OnCharTyped(string caretChar, string remainedText)
+        {
+            txtCaretChar.Text = caretChar;
+            txtPreview.Text = remainedText;
         }
 
         private void FreeModePage_KeyDown(object sender, KeyEventArgs e)
@@ -57,56 +49,40 @@ namespace Typing.Pages
             switch (e.Key)
             {
                 case Key.Enter:
-                    if (TypingIndex >= currentLine.Length)
+                    if (TypingStream.IsEndOfLine)
                     {
-                        bool noNextLine = !GoToNextLine();
+                        bool noNextLine = !TypingStream.GoToNextLine();
                         if (noNextLine)
                         {
                             MessageBox.Show("Congratulations!!! You typed all of text");
                         }
+                        else
+                        {
+                            AddCurrentLineToTypedText();
+                            txtCurrentTypedLine.Text = "";
+                        }
                     }
                     break;
+
                 default:
-                    char? initChar = USKeyboard.Key2Char(e.Key, isToggled);
-                    bool isCharRemained = TypingIndex < currentLine.Length;
-                    if (initChar != null && isCharRemained)
+                    char? keyChar = USKeyboard.Key2Char(e.Key, isToggled);
+                    if (keyChar != null && !TypingStream.IsEndOfLine)
                     {
-                        char keyChar = initChar.Value;
-                        AddChar(keyChar);
-                        TypingIndex++;
+                        if (TypingStream.IsCorrectChar(keyChar.Value))
+                            AddCorrectChar(keyChar.Value);
+                        else
+                            AddInCorrectChar(keyChar.Value);
+
+                        TypingStream.GoToNextChar();
                     }
                     break;
             }
         }
 
-        private void GoToFirstLine()
+        private void CleanAll()
         {
             txtCurrentTypedLine.Text = "";
             txtTyped.Text = "";
-
-            TextToBeTyped.BaseStream.Seek(0, SeekOrigin.Begin);
-            currentLine = TextToBeTyped.ReadLine();
-
-            TypingIndex = 0;
-        }
-
-        private bool GoToNextLine()
-        {
-            string line = TextToBeTyped.ReadLine();
-            if (line != null)
-            {
-                AddCurrentLineToTypedText();
-                currentLine = line;
-                txtCurrentTypedLine.Text = "";
-                TypingIndex = 0;
-                return true;
-            }
-            else
-            {
-                currentLine = "";
-                return false;
-            }
-
         }
 
         private void AddCurrentLineToTypedText()
@@ -125,19 +101,6 @@ namespace Typing.Pages
                     break;
             }
             
-        }
-
-        private void AddChar(char keyChar)
-        {
-            char correctChar = currentLine[TypingIndex];
-            if (keyChar == correctChar)
-            {
-                AddCorrectChar(keyChar);
-            }
-            else
-            {
-                AddInCorrectChar(keyChar);
-            }
         }
 
         private void AddInCorrectChar(char keyChar)
