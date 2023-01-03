@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\KeyboardLayout.cs" />
+    <Compile Include="Classes\StatisticsCalculator.cs" />
     <Compile Include="Classes\TypingStream.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
