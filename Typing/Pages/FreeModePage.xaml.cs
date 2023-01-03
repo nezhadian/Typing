@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Typing.Pages
 {
@@ -21,6 +22,7 @@ namespace Typing.Pages
     {
         KeyboardLayout USKeyboard = new KeyboardLayout();
         TypingStream TypingStream;
+        StatisticsCalculator Statistics;
 
         public FreeModePage()
         {
@@ -30,6 +32,23 @@ namespace Typing.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
+            InitTypingStram();
+            Statistics = new StatisticsCalculator();
+            InitTimeTimer();
+        }
+
+        private void InitTimeTimer()
+        {
+            DispatcherTimer timer = new DispatcherTimer()
+            {
+                Interval = new TimeSpan(0, 0, 1),
+                IsEnabled = true
+            };
+            timer.Tick += (s,e) => txtTimer.Text = Statistics.ElapsedTime.ToString("ss");
+        }
+
+        private void InitTypingStram()
+        {
             CleanAll();
             TypingStream = new TypingStream(File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt"));
             TypingStream.OnCharTyped += TypingStream_OnCharTyped;
@@ -44,11 +63,11 @@ namespace Typing.Pages
 
         private void FreeModePage_KeyDown(object sender, KeyEventArgs e)
         {
-            bool isToggled = !Console.CapsLock;
-            isToggled = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.LeftShift) ? !isToggled : isToggled;
+            KeyData key = new KeyData(e.Key, USKeyboard);
             switch (e.Key)
             {
                 case Key.Enter:
+
                     if (TypingStream.IsEndOfLine)
                     {
                         bool noNextLine = !TypingStream.GoToNextLine();
@@ -61,22 +80,26 @@ namespace Typing.Pages
                             AddCurrentLineToTypedText();
                             txtCurrentTypedLine.Text = "";
                         }
+                        key.IsCorrect = true;
                     }
                     break;
 
                 default:
-                    char? keyChar = USKeyboard.Key2Char(e.Key, isToggled);
-                    if (keyChar != null && !TypingStream.IsEndOfLine)
+
+                    if (key.HasKeyChar && !TypingStream.IsEndOfLine)
                     {
-                        if (TypingStream.IsCorrectChar(keyChar.Value))
-                            AddCorrectChar(keyChar.Value);
+                        key.IsCorrect = TypingStream.IsCorrectChar(key.KeyChar);
+
+                        if (key.IsCorrect)
+                            AddCorrectChar(key.KeyChar);
                         else
-                            AddInCorrectChar(keyChar.Value);
+                            AddInCorrectChar(key.KeyChar);
 
                         TypingStream.GoToNextChar();
                     }
                     break;
             }
+            Statistics.AddKey(key);
         }
 
         private void CleanAll()
