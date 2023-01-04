@@ -58,7 +58,7 @@
             </TextBlock>
 
             <TextBlock x:Name="txtTimer" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.Timer.TextColor}" FontSize="24">
-                00:00:05
+                00:00
             </TextBlock>
 
             <ToggleButton Style="{StaticResource FreeMode.PausePlayButton.Style}"/>
