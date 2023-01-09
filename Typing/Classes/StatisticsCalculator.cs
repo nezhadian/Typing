@@ -13,31 +13,38 @@ namespace Typing
         public List<KeyData> KeyList = new List<KeyData>();
         bool isFirstKey = true;
 
+        public TimeSpan ElapsedKeysTime;
         public TimeSpan ElapsedTime
         {
             get
             {
                 if (isFirstKey)
                     return new TimeSpan(0);
-
-                TimeSpan et = new TimeSpan();
-                for (int i = 0; i < KeyList.Count; i++)
-                {
-                    KeyData key = KeyList[i];
-                    et += key.DelayTime;
-                }
-                et += (DateTime.Now - LastTime);
-                return et;
+                return ElapsedKeysTime + (DateTime.Now - LastTime);
             }
         }
+
+        private void RecalculateElapsedTime()
+        {
+            TimeSpan et = new TimeSpan();
+            for (int i = 0; i < KeyList.Count; i++)
+            {
+                KeyData key = KeyList[i];
+                et += key.DelayTime;
+            }
+            ElapsedKeysTime = et;
+        }
+
         internal void AddKey(KeyData data)
         {
             if (isFirstKey)
             {
                 LastTime = DateTime.Now;
+                ElapsedKeysTime = new TimeSpan(0);
                 isFirstKey = false;
             }
             data.DelayTime = DateTime.Now - LastTime;
+            ElapsedKeysTime += data.DelayTime;
             KeyList.Add(data);
 
             LastTime = DateTime.Now;
