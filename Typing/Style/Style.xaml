@@ -171,6 +171,7 @@
         <Setter Property="Background" Value="{DynamicResource FreeMode.MainLine.CaretBg}" />
         <Setter Property="BorderBrush" Value="{DynamicResource FreeMode.MainLine.CaretBorder}" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="1" />
     </Style>
     
     
