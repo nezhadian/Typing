@@ -10,7 +10,7 @@ namespace Typing
     class StatisticsCalculator
     {
         public DateTime LastTime;
-        public List<KeyData> KeyList = new List<KeyData>();
+        public List<KeyData> KeyDataList = new List<KeyData>();
         bool isFirstKey = true;
 
         public TimeSpan ElapsedKeysTime;
@@ -24,15 +24,52 @@ namespace Typing
             }
         }
 
-        private void RecalculateElapsedTime()
+        public double CorrectWordPerMinute
         {
-            TimeSpan et = new TimeSpan();
-            for (int i = 0; i < KeyList.Count; i++)
+            get
             {
-                KeyData key = KeyList[i];
-                et += key.DelayTime;
+                if (isFirstKey)
+                    return 0;
+
+                int wordLength = 0;
+                int correctWord = 0;
+                bool isCorrectWord = true;
+                for (int i = 0; i < KeyDataList.Count; i++)
+                {
+                    KeyData key = KeyDataList[i];
+                    switch (key.Key)
+                    {
+                        case Key.Space:
+                        case Key.Enter:
+                        case Key.Oem1:
+                        case Key.Oem2:
+                        case Key.Oem7:
+                        case Key.OemComma:
+                        case Key.OemPeriod:
+                            if(wordLength > 0)
+                            {
+                                if (isCorrectWord)
+                                    correctWord++;
+                                else
+                                    isCorrectWord = true;
+                                wordLength = 0;
+                            }
+                            break;
+
+                        default:
+                            if (key.HasKeyChar)
+                            {
+                                if (!key.IsCorrect)
+                                    isCorrectWord = false;
+                                wordLength++;
+                            }
+                            break;
+                    }
+                }
+
+                double divisor = ElapsedTime.TotalSeconds / 60;
+                return correctWord / divisor;
             }
-            ElapsedKeysTime = et;
         }
 
         internal void AddKey(KeyData data)
@@ -45,7 +82,7 @@ namespace Typing
             }
             data.DelayTime = DateTime.Now - LastTime;
             ElapsedKeysTime += data.DelayTime;
-            KeyList.Add(data);
+            KeyDataList.Add(data);
 
             LastTime = DateTime.Now;
         }

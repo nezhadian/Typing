@@ -44,7 +44,11 @@ namespace Typing.Pages
                 Interval = new TimeSpan(0, 0, 1),
                 IsEnabled = true
             };
-            timer.Tick += (s,e) => txtTimer.Text = Statistics.ElapsedTime.ToString("mm':'ss");
+            timer.Tick += (s, e) =>
+            {
+                txtTimer.Text = Statistics.ElapsedTime.ToString("mm':'ss");
+                txtWPM.Text = string.Format("{0:0.00}", Statistics.CorrectWordPerMinute);
+            };
         }
 
         private void InitTypingStram()
