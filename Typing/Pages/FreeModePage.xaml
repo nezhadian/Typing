@@ -7,6 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Loaded="Page_Loaded"
+      x:Name="main"
       Title="FreeModePage">
 
     <Grid Margin="40,25">
@@ -53,7 +54,7 @@
         
         <Grid Grid.Row="3">
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
-                <Run FontSize="27" x:Name="txtWPM">27</Run>
+                <Run FontSize="27" x:Name="txtWPM">0.00</Run>
                 <Run FontSize="16">WPM</Run>
             </TextBlock>
 
@@ -61,7 +62,7 @@
                 00:00
             </TextBlock>
 
-            <ToggleButton Style="{StaticResource FreeMode.PausePlayButton.Style}"/>
+            <ToggleButton Style="{StaticResource FreeMode.PausePlayButton.Style}" IsChecked="{Binding IsGamePaused,ElementName=main,Mode=TwoWay}"/>
         </Grid>
 
     </Grid>

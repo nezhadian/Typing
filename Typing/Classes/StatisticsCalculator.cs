@@ -13,11 +13,27 @@ namespace Typing
         public List<KeyData> KeyDataList = new List<KeyData>();
         bool isFirstKey = true;
 
+        private bool isCollect;
+        public bool IsCollecting
+        {
+            set
+            {
+                isCollect = value;
+                if (isCollect)
+                {
+                    LastTime = DateTime.Now;
+                }
+            }
+            get => isCollect;
+        }
+
         public TimeSpan ElapsedKeysTime;
         public TimeSpan ElapsedTime
         {
             get
             {
+                if (!IsCollecting)
+                    return ElapsedKeysTime;
                 if (isFirstKey)
                     return new TimeSpan(0);
                 return ElapsedKeysTime + (DateTime.Now - LastTime);
@@ -74,12 +90,16 @@ namespace Typing
 
         internal void AddKey(KeyData data)
         {
+            if (!IsCollecting)
+                return;
+
             if (isFirstKey)
             {
                 LastTime = DateTime.Now;
                 ElapsedKeysTime = new TimeSpan(0);
                 isFirstKey = false;
             }
+
             data.DelayTime = DateTime.Now - LastTime;
             ElapsedKeysTime += data.DelayTime;
             KeyDataList.Add(data);

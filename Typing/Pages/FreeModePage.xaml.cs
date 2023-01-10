@@ -20,13 +20,29 @@ namespace Typing.Pages
     /// </summary>
     public partial class FreeModePage : Page
     {
-        KeyboardLayout USKeyboard = new KeyboardLayout();
-        TypingStream TypingStream;
-        StatisticsCalculator Statistics;
+        #region Useless
+
+        public static readonly DependencyProperty IsGamePausedProperty =
+            DependencyProperty.Register("IsGamePaused", typeof(bool), typeof(FreeModePage), new PropertyMetadata(false));
 
         public FreeModePage()
         {
             InitializeComponent();
+        }
+
+        #endregion
+
+        //private 
+        KeyboardLayout USKeyboard = new KeyboardLayout();
+        StatisticsCalculator Statistics;
+        TypingStream TypingStream;
+
+        public bool IsGamePaused
+        {
+            get { return (bool)GetValue(IsGamePausedProperty); }
+            set { SetValue(IsGamePausedProperty, value);
+                Statistics.IsCollecting = !value;
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -34,10 +50,11 @@ namespace Typing.Pages
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
             InitTypingStram();
             Statistics = new StatisticsCalculator();
-            InitTimeTimer();
+            InitTimer();
+            IsGamePaused = false;
         }
 
-        private void InitTimeTimer()
+        private void InitTimer()
         {
             DispatcherTimer timer = new DispatcherTimer()
             {
@@ -51,6 +68,7 @@ namespace Typing.Pages
             };
         }
 
+        //TypingStream
         private void InitTypingStram()
         {
             CleanAll();
@@ -58,60 +76,63 @@ namespace Typing.Pages
             TypingStream.OnCharTyped += TypingStream_OnCharTyped;
             TypingStream.GoToFirstLine();
         }
-
+        private void CleanAll()
+        {
+            txtCurrentTypedLine.Text = "";
+            txtTyped.Text = "";
+        }
         private void TypingStream_OnCharTyped(string caretChar, string remainedText)
         {
             txtCaretChar.Text = caretChar;
             txtPreview.Text = remainedText;
         }
 
+        //Key Down
         private void FreeModePage_KeyDown(object sender, KeyEventArgs e)
         {
             KeyData key = new KeyData(e.Key, USKeyboard);
+
+            if (key.Key != Key.Escape && IsGamePaused)
+                return;
+
             switch (e.Key)
             {
                 case Key.Enter:
-
-                    if (TypingStream.IsEndOfLine)
-                    {
-                        bool noNextLine = !TypingStream.GoToNextLine();
-                        if (noNextLine)
-                        {
-                            MessageBox.Show("Congratulations!!! You typed all of text");
-                        }
-                        else
-                        {
-                            AddCurrentLineToTypedText();
-                            txtCurrentTypedLine.Text = "";
-                        }
-                        key.IsCorrect = true;
-                    }
+                    EnterKeyDown(key);
                     break;
+
+                case Key.Escape:
+                    IsGamePaused = !IsGamePaused;
+                    return;
 
                 default:
-
-                    if (key.HasKeyChar && !TypingStream.IsEndOfLine)
-                    {
-                        key.IsCorrect = TypingStream.IsCorrectChar(key.KeyChar);
-
-                        if (key.IsCorrect)
-                            AddCorrectChar(key.KeyChar);
-                        else
-                            AddInCorrectChar(key.KeyChar);
-
-                        TypingStream.GoToNextChar();
-                    }
+                    if(key.HasKeyChar)
+                        KeyHasCharDown(key);
                     break;
             }
+
             Statistics.AddKey(key);
         }
 
-        private void CleanAll()
+        //Enter Key
+        private void EnterKeyDown(KeyData key)
         {
-            txtCurrentTypedLine.Text = "";
-            txtTyped.Text = "";
+            if (TypingStream.IsEndOfLine)
+            {
+                bool noNextLine = !TypingStream.GoToNextLine();
+                if (noNextLine)
+                {
+                    IsGamePaused = true;
+                    MessageBox.Show("Congratulations!!! You typed all of text");
+                }
+                else
+                {
+                    AddCurrentLineToTypedText();
+                    txtCurrentTypedLine.Text = "";
+                }
+                key.IsCorrect = true;
+            }
         }
-
         private void AddCurrentLineToTypedText()
         {
             Inline[] inlineList = new Inline[500];
@@ -130,6 +151,21 @@ namespace Typing.Pages
             
         }
 
+        // Any Key Has Keychar
+        private void KeyHasCharDown(KeyData key)
+        {
+            if (!TypingStream.IsEndOfLine)
+            {
+                key.IsCorrect = TypingStream.IsCorrectChar(key.KeyChar);
+
+                if (key.IsCorrect)
+                    AddCorrectChar(key.KeyChar);
+                else
+                    AddInCorrectChar(key.KeyChar);
+
+                TypingStream.GoToNextChar();
+            }
+        }
         private void AddInCorrectChar(char keyChar)
         {
             object lastInline = txtCurrentTypedLine.Inlines.LastInline;
@@ -151,7 +187,6 @@ namespace Typing.Pages
                 txtCurrentTypedLine.Inlines.Add(newIncorrectPiece);
             }
         }
-
         private void AddCorrectChar(char keyChar)
         {
             object lastInline = txtCurrentTypedLine.Inlines.LastInline;
