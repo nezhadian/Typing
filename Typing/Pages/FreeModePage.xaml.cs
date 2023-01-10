@@ -23,9 +23,10 @@ namespace Typing.Pages
         //private 
         KeyboardLayout USKeyboard = new KeyboardLayout();
         StatisticsCalculator Statistics;
-        TypingStream TypingStream;
+        //TypingStream TypingStream;
 
         //Properties
+
         bool isGamePaused;
         public bool IsGamePaused
         {
@@ -37,6 +38,28 @@ namespace Typing.Pages
             }
         }
 
+        //Typing Stram
+
+        private TypingStream typingStream;
+        public TypingStream TypingStream
+        {
+            get => typingStream;
+            set { 
+                typingStream = value;
+                TypingStream.OnCharTyped += TypingStream_OnCharTyped;
+                typingStream.GoToFirstLine();
+                Statistics.ClearAll();
+                typView.ClearAll();
+                Statistics.WaitUntilKeyPress = true;
+            }
+        }
+
+        private void TypingStream_OnCharTyped(string caretChar, string remainedText)
+        {
+            typView.CurrentTyping = caretChar;
+            typView.PreviewText = remainedText;
+        }
+
         //Initialize
         public FreeModePage()
         {
@@ -45,8 +68,8 @@ namespace Typing.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
-            InitTypingStram();
             Statistics = new StatisticsCalculator();
+            TypingStream = new TypingStream(File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt"));
             InitTimer();
             IsGamePaused = false;
         }
@@ -68,19 +91,6 @@ namespace Typing.Pages
 
             txtTimer.Text = Statistics.ElapsedTime.ToString("mm':'ss");
             txtWPM.Text = string.Format("{0:0.00}", Statistics.CorrectWordPerMinute);
-        }
-
-        //TypingStream
-        private void InitTypingStram()
-        {
-            TypingStream = new TypingStream(File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt"));
-            TypingStream.OnCharTyped += TypingStream_OnCharTyped;
-            TypingStream.GoToFirstLine();
-        }
-        private void TypingStream_OnCharTyped(string caretChar, string remainedText)
-        {
-            typView.CurrentTyping = caretChar;
-            typView.PreviewText = remainedText;
         }
 
         //Key Down

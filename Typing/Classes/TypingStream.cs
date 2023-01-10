@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Typing
 {
-    class TypingStream
+    public class TypingStream
     {
         public StreamReader TextStream;
 

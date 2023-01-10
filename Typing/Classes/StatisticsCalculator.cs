@@ -11,7 +11,7 @@ namespace Typing
     {
         public DateTime LastTime;
         public List<KeyData> KeyDataList = new List<KeyData>();
-        bool WaitUntilKeyPress = true;
+        public bool WaitUntilKeyPress = true;
 
         private bool isCollect;
         public bool IsCollecting
@@ -65,6 +65,12 @@ namespace Typing
             }
         }
 
+        public StatisticsCalculator()
+        {
+            LastTime = DateTime.Now;
+        }
+        
+
         internal void AddKey(KeyData data)
         {
             if (!IsCollecting)
@@ -83,10 +89,11 @@ namespace Typing
             LastTime = DateTime.Now;
         }
 
-        public StatisticsCalculator()
+        internal void ClearAll()
         {
-            LastTime = DateTime.Now;
+            KeyDataList.Clear();
         }
+
 
     }
     public class KeyData

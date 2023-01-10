@@ -36,11 +36,7 @@ namespace Typing.UserControls
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtCurrentTypedLine.Text = "";
-            txtTyped.Text = "";
-        }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e) => ClearAll();
 
         public void WriteKeyChar(KeyData key)
         {
@@ -54,6 +50,12 @@ namespace Typing.UserControls
         {
             AddCurrentLineToTypedText();
             txtCurrentTypedLine.Text = "";
+        }
+
+        internal void ClearAll()
+        {
+            txtCurrentTypedLine.Text = "";
+            txtTyped.Text = "";
         }
 
         void AddCurrentLineToTypedText()
