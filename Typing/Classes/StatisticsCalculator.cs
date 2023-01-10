@@ -61,7 +61,7 @@ namespace Typing
                 }
 
                 double divisor = (WaitUntilKeyPress ? KeysElapsedTime : ElapsedTime).TotalSeconds / 60;
-                return correctWord / divisor;
+                return correctWord != 0 ? correctWord / divisor : 0;
             }
         }
 
