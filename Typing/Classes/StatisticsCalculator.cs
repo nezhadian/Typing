@@ -11,7 +11,7 @@ namespace Typing
     {
         public DateTime LastTime;
         public List<KeyData> KeyDataList = new List<KeyData>();
-        bool isFirstKey = true;
+        bool WaitUntilKeyPress = true;
 
         private bool isCollect;
         public bool IsCollecting
@@ -20,22 +20,18 @@ namespace Typing
             {
                 isCollect = value;
                 if (isCollect)
-                {
-                    LastTime = DateTime.Now;
-                }
+                    WaitUntilKeyPress = true;
             }
             get => isCollect;
         }
 
-        public TimeSpan ElapsedKeysTime;
+        public TimeSpan ElapsedKeysTime = new TimeSpan(0);
         public TimeSpan ElapsedTime
         {
             get
             {
-                if (!IsCollecting)
+                if (!IsCollecting || WaitUntilKeyPress)
                     return ElapsedKeysTime;
-                if (isFirstKey)
-                    return new TimeSpan(0);
                 return ElapsedKeysTime + (DateTime.Now - LastTime);
             }
         }
@@ -44,9 +40,6 @@ namespace Typing
         {
             get
             {
-                if (isFirstKey)
-                    return 0;
-
                 int wordLength = 0;
                 int correctWord = 0;
                 bool isCorrectWord = true;
@@ -83,7 +76,7 @@ namespace Typing
                     }
                 }
 
-                double divisor = ElapsedTime.TotalSeconds / 60;
+                double divisor = (WaitUntilKeyPress ? ElapsedKeysTime : ElapsedTime).TotalSeconds / 60;
                 return correctWord / divisor;
             }
         }
@@ -93,11 +86,10 @@ namespace Typing
             if (!IsCollecting)
                 return;
 
-            if (isFirstKey)
+            if (WaitUntilKeyPress)
             {
                 LastTime = DateTime.Now;
-                ElapsedKeysTime = new TimeSpan(0);
-                isFirstKey = false;
+                WaitUntilKeyPress = false;
             }
 
             data.DelayTime = DateTime.Now - LastTime;
