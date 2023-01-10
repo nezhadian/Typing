@@ -10,91 +10,36 @@ namespace Typing
     class StatisticsCalculator
     {
         public DateTime LastTime;
-        public List<KeyData> KeyDataList = new List<KeyData>();
-        bool WaitUntilKeyPress = true;
+        public List<KeyData> KeyList = new List<KeyData>();
+        bool isFirstKey = true;
 
-        private bool isCollect;
-        public bool IsCollecting
-        {
-            set
-            {
-                isCollect = value;
-                if (isCollect)
-                    WaitUntilKeyPress = true;
-            }
-            get => isCollect;
-        }
-
-        public TimeSpan ElapsedKeysTime = new TimeSpan(0);
         public TimeSpan ElapsedTime
         {
             get
             {
-                if (!IsCollecting || WaitUntilKeyPress)
-                    return ElapsedKeysTime;
-                return ElapsedKeysTime + (DateTime.Now - LastTime);
-            }
-        }
+                if (isFirstKey)
+                    return new TimeSpan(0);
 
-        public double CorrectWordPerMinute
-        {
-            get
-            {
-                int wordLength = 0;
-                int correctWord = 0;
-                bool isCorrectWord = true;
-                for (int i = 0; i < KeyDataList.Count; i++)
+                TimeSpan et = new TimeSpan();
+                for (int i = 0; i < KeyList.Count; i++)
                 {
-                    KeyData key = KeyDataList[i];
-                    switch (key.Key)
-                    {
-                        case Key.Space:
-                        case Key.Enter:
-                        case Key.Oem1:
-                        case Key.Oem2:
-                        case Key.Oem7:
-                        case Key.OemComma:
-                        case Key.OemPeriod:
-                            if(wordLength > 0)
-                            {
-                                if (isCorrectWord)
-                                    correctWord++;
-                                else
-                                    isCorrectWord = true;
-                                wordLength = 0;
-                            }
-                            break;
-
-                        default:
-                            if (key.HasKeyChar)
-                            {
-                                if (!key.IsCorrect)
-                                    isCorrectWord = false;
-                                wordLength++;
-                            }
-                            break;
-                    }
+                    KeyData key = KeyList[i];
+                    et += key.DelayTime;
                 }
-
-                double divisor = (WaitUntilKeyPress ? ElapsedKeysTime : ElapsedTime).TotalSeconds / 60;
-                return correctWord / divisor;
+                et += (DateTime.Now - LastTime);
+                return et;
             }
         }
 
         internal void AddKey(KeyData data)
         {
-            if (!IsCollecting)
-                return;
-
-            if (WaitUntilKeyPress)
+            if (isFirstKey)
             {
                 LastTime = DateTime.Now;
-                WaitUntilKeyPress = false;
+                isFirstKey = false;
             }
-
             data.DelayTime = DateTime.Now - LastTime;
-            ElapsedKeysTime += data.DelayTime;
-            KeyDataList.Add(data);
+            KeyList.Add(data);
 
             LastTime = DateTime.Now;
         }
