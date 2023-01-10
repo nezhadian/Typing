@@ -63,6 +63,9 @@ namespace Typing.Pages
             };
             timer.Tick += (s, e) =>
             {
+                if (Statistics.LastElapsedTime > new TimeSpan(0, 0, 12))
+                    IsGamePaused = true;
+
                 txtTimer.Text = Statistics.ElapsedTime.ToString("mm':'ss");
                 txtWPM.Text = string.Format("{0:0.00}", Statistics.CorrectWordPerMinute);
             };

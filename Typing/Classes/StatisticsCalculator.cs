@@ -25,14 +25,15 @@ namespace Typing
             get => isCollect;
         }
 
-        public TimeSpan ElapsedKeysTime = new TimeSpan(0);
+        public TimeSpan KeysElapsedTime = new TimeSpan(0);
+        public TimeSpan LastElapsedTime => DateTime.Now - LastTime;
         public TimeSpan ElapsedTime
         {
             get
             {
                 if (!IsCollecting || WaitUntilKeyPress)
-                    return ElapsedKeysTime;
-                return ElapsedKeysTime + (DateTime.Now - LastTime);
+                    return KeysElapsedTime;
+                return KeysElapsedTime + LastElapsedTime;
             }
         }
 
@@ -76,7 +77,7 @@ namespace Typing
                     }
                 }
 
-                double divisor = (WaitUntilKeyPress ? ElapsedKeysTime : ElapsedTime).TotalSeconds / 60;
+                double divisor = (WaitUntilKeyPress ? KeysElapsedTime : ElapsedTime).TotalSeconds / 60;
                 return correctWord / divisor;
             }
         }
@@ -93,9 +94,14 @@ namespace Typing
             }
 
             data.DelayTime = DateTime.Now - LastTime;
-            ElapsedKeysTime += data.DelayTime;
+            KeysElapsedTime += data.DelayTime;
             KeyDataList.Add(data);
 
+            LastTime = DateTime.Now;
+        }
+
+        public StatisticsCalculator()
+        {
             LastTime = DateTime.Now;
         }
 
