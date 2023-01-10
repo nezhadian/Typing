@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Typing.Pages"
+      xmlns:ctrls="clr-namespace:Typing.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Loaded="Page_Loaded"
@@ -16,42 +17,8 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Grid HorizontalAlignment="Center" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <ctrls:TypingView x:Name="typView" HorizontalAlignment="Center"/>
 
-            <TextBlock x:Name="txtTyped"  VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
-                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
-             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
-             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
-                <LineBreak />
-            
-                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
-             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
-             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
-            
-                <LineBreak />
-               <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
-             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
-             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
-            </TextBlock>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top">
-                <TextBlock x:Name="txtCurrentTypedLine" Style="{StaticResource FreeMode.MainLine.BaseStyle}">
-                    <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
-                 --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
-                 --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w A</Run>
-                </TextBlock>
-                <Border Style="{StaticResource FreeMode.MainLine.Caret}">
-                    <TextBlock x:Name="txtCaretChar" HorizontalAlignment="Center" Text="r" Style="{StaticResource FreeMode.MainLine.Preview}"/>
-                </Border>
-                <TextBlock x:Name="txtPreview" Text="e You ?" Style="{StaticResource FreeMode.MainLine.Preview}"/>
-            </StackPanel>
-        </Grid>
-        
         <Grid Grid.Row="3">
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins" FontWeight="Bold" Foreground="{DynamicResource FreeMode.WPMText.TextColor}">
                 <Run FontSize="27" x:Name="txtWPM">0.00</Run>

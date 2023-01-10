@@ -73,20 +73,14 @@ namespace Typing.Pages
         //TypingStream
         private void InitTypingStram()
         {
-            CleanAll();
             TypingStream = new TypingStream(File.OpenText($"{Environment.CurrentDirectory}\\Texts\\FreeModeTypingPractice.txt"));
             TypingStream.OnCharTyped += TypingStream_OnCharTyped;
             TypingStream.GoToFirstLine();
         }
-        private void CleanAll()
-        {
-            txtCurrentTypedLine.Text = "";
-            txtTyped.Text = "";
-        }
         private void TypingStream_OnCharTyped(string caretChar, string remainedText)
         {
-            txtCaretChar.Text = caretChar;
-            txtPreview.Text = remainedText;
+            typView.CurrentTyping = caretChar;
+            typView.PreviewText = remainedText;
         }
 
         //Key Down
@@ -99,30 +93,23 @@ namespace Typing.Pages
 
             switch (e.Key)
             {
-                case Key.Enter:
-                    EnterKeyDown(key);
-                    break;
-
                 case Key.Escape:
                     EscKeyDown();
                     return;
 
+                case Key.Enter:
+                    EnterKeyDown(key);
+                    break;
+
                 default:
-                    if(key.HasKeyChar)
+                    if (key.HasKeyChar)
                         KeyHasCharDown(key);
                     break;
             }
 
             Statistics.AddKey(key);
         }
-
-        //Esc Key
-        private void EscKeyDown()
-        {
-            IsGamePaused = !IsGamePaused;
-        }
-
-        //Enter Key
+        // Enter Key Down
         private void EnterKeyDown(KeyData key)
         {
             if (TypingStream.IsEndOfLine)
@@ -135,28 +122,10 @@ namespace Typing.Pages
                 }
                 else
                 {
-                    AddCurrentLineToTypedText();
-                    txtCurrentTypedLine.Text = "";
+                    typView.ClearLine();
                 }
                 key.IsCorrect = true;
             }
-        }
-        private void AddCurrentLineToTypedText()
-        {
-            Inline[] inlineList = new Inline[500];
-            txtCurrentTypedLine.Inlines.CopyTo(inlineList, 0);
-
-            if(txtTyped.Text != "")
-                txtTyped.Inlines.Add(new LineBreak());
-
-            foreach (Inline inline in inlineList)
-            {
-                if (inline != null)
-                    txtTyped.Inlines.Add(inline);
-                else
-                    break;
-            }
-            
         }
 
         // Any Key Has Keychar
@@ -165,54 +134,15 @@ namespace Typing.Pages
             if (!TypingStream.IsEndOfLine)
             {
                 key.IsCorrect = TypingStream.IsCorrectChar(key.KeyChar);
-
-                if (key.IsCorrect)
-                    AddCorrectChar(key.KeyChar);
-                else
-                    AddInCorrectChar(key.KeyChar);
-
+                typView.WriteKeyChar(key);
                 TypingStream.GoToNextChar();
             }
         }
-        private void AddInCorrectChar(char keyChar)
+
+        //Esc Key
+        private void EscKeyDown()
         {
-            object lastInline = txtCurrentTypedLine.Inlines.LastInline;
-            //Run is used for correct Piece and Underline is used for InCorrect Piece
-            if (lastInline is Underline)
-            {
-                Underline lastInCorrectPiece = (Underline)lastInline;
-                Run LastRunInUnderline = (Run)lastInCorrectPiece.Inlines.LastInline;
-                LastRunInUnderline.Text += keyChar;
-            }
-            else
-            {
-                Underline newIncorrectPiece = new Underline()
-                {
-                    Style = (Style)App.Current.FindResource("FreeMode.MainLine.Mistake")
-                };
-                Run TextPiece = new Run(keyChar.ToString());
-                newIncorrectPiece.Inlines.Add(TextPiece);
-                txtCurrentTypedLine.Inlines.Add(newIncorrectPiece);
-            }
-        }
-        private void AddCorrectChar(char keyChar)
-        {
-            object lastInline = txtCurrentTypedLine.Inlines.LastInline;
-            //Run is used for correct Piece and Underline is used for InCorrect Piece
-            if (lastInline is Run)
-            {
-                Run lastTextPiece = (Run)lastInline;
-                lastTextPiece.Text += keyChar;
-            }
-            else
-            {
-                Run newTextPiece = new Run()
-                {
-                    Text = keyChar.ToString(),
-                    Style = (Style)App.Current.FindResource("FreeMode.MainLine.Correct")
-                };
-                txtCurrentTypedLine.Inlines.Add(newTextPiece);
-            }
+            IsGamePaused = !IsGamePaused;
         }
 
         //Play Pause Button

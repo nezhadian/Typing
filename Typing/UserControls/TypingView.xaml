@@ -5,8 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Typing.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="450" d:DesignWidth="450">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="txtTyped"  VerticalAlignment="Bottom" Margin="0,0,0,10" Style="{StaticResource FreeMode.TypedText.DefaultStyle}">
+                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
+                <LineBreak />
             
+                <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
+            
+                <LineBreak />
+               <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+             --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+             --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w Are You ?</Run>
+        </TextBlock>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top">
+            <TextBlock x:Name="txtCurrentTypedLine" Style="{StaticResource FreeMode.MainLine.BaseStyle}">
+                    <Run Style="{StaticResource FreeMode.MainLine.Correct}">Hello.H</Run><!--
+                 --><Underline Style="{StaticResource FreeMode.MainLine.Mistake}">p</Underline><!--
+                 --><Run Style="{StaticResource FreeMode.MainLine.Correct}">w A</Run>
+            </TextBlock>
+            <Border Style="{StaticResource FreeMode.MainLine.Caret}">
+                <TextBlock x:Name="txtCaretChar" HorizontalAlignment="Center" Text="r" Style="{StaticResource FreeMode.MainLine.Preview}"/>
+            </Border>
+            <TextBlock x:Name="txtPreview" Text="e You ?" Style="{StaticResource FreeMode.MainLine.Preview}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
