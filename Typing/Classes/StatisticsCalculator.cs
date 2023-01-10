@@ -10,36 +10,91 @@ namespace Typing
     class StatisticsCalculator
     {
         public DateTime LastTime;
-        public List<KeyData> KeyList = new List<KeyData>();
-        bool isFirstKey = true;
+        public List<KeyData> KeyDataList = new List<KeyData>();
+        bool WaitUntilKeyPress = true;
 
+        private bool isCollect;
+        public bool IsCollecting
+        {
+            set
+            {
+                isCollect = value;
+                if (isCollect)
+                    WaitUntilKeyPress = true;
+            }
+            get => isCollect;
+        }
+
+        public TimeSpan ElapsedKeysTime = new TimeSpan(0);
         public TimeSpan ElapsedTime
         {
             get
             {
-                if (isFirstKey)
-                    return new TimeSpan(0);
+                if (!IsCollecting || WaitUntilKeyPress)
+                    return ElapsedKeysTime;
+                return ElapsedKeysTime + (DateTime.Now - LastTime);
+            }
+        }
 
-                TimeSpan et = new TimeSpan();
-                for (int i = 0; i < KeyList.Count; i++)
+        public double CorrectWordPerMinute
+        {
+            get
+            {
+                int wordLength = 0;
+                int correctWord = 0;
+                bool isCorrectWord = true;
+                for (int i = 0; i < KeyDataList.Count; i++)
                 {
-                    KeyData key = KeyList[i];
-                    et += key.DelayTime;
+                    KeyData key = KeyDataList[i];
+                    switch (key.Key)
+                    {
+                        case Key.Space:
+                        case Key.Enter:
+                        case Key.Oem1:
+                        case Key.Oem2:
+                        case Key.Oem7:
+                        case Key.OemComma:
+                        case Key.OemPeriod:
+                            if (wordLength > 0)
+                            {
+                                if (isCorrectWord)
+                                    correctWord++;
+                                else
+                                    isCorrectWord = true;
+                                wordLength = 0;
+                            }
+                            break;
+
+                        default:
+                            if (key.HasKeyChar)
+                            {
+                                if (!key.IsCorrect)
+                                    isCorrectWord = false;
+                                wordLength++;
+                            }
+                            break;
+                    }
                 }
-                et += (DateTime.Now - LastTime);
-                return et;
+
+                double divisor = (WaitUntilKeyPress ? ElapsedKeysTime : ElapsedTime).TotalSeconds / 60;
+                return correctWord / divisor;
             }
         }
 
         internal void AddKey(KeyData data)
         {
-            if (isFirstKey)
+            if (!IsCollecting)
+                return;
+
+            if (WaitUntilKeyPress)
             {
                 LastTime = DateTime.Now;
-                isFirstKey = false;
+                WaitUntilKeyPress = false;
             }
+
             data.DelayTime = DateTime.Now - LastTime;
-            KeyList.Add(data);
+            ElapsedKeysTime += data.DelayTime;
+            KeyDataList.Add(data);
 
             LastTime = DateTime.Now;
         }
@@ -54,16 +109,16 @@ namespace Typing
         public readonly bool HasKeyChar;
         public bool IsCorrect;
 
-        public KeyData(Key key,KeyboardLayout kl)
+        public KeyData(Key key, KeyboardLayout kl)
         {
             Key = key;
             IsToggled = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.LeftShift) ? Console.CapsLock : !Console.CapsLock;
             char? keyChar = kl.Key2Char(key, IsToggled);
             HasKeyChar = keyChar != null;
-            if(HasKeyChar)
+            if (HasKeyChar)
                 KeyChar = keyChar.Value;
             IsCorrect = false;
-            
+
         }
 
     }
