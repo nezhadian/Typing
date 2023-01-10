@@ -27,15 +27,8 @@ namespace Typing
 
         public TimeSpan KeysElapsedTime = new TimeSpan(0);
         public TimeSpan LastElapsedTime => DateTime.Now - LastTime;
-        public TimeSpan ElapsedTime
-        {
-            get
-            {
-                if (!IsCollecting || WaitUntilKeyPress)
-                    return KeysElapsedTime;
-                return KeysElapsedTime + LastElapsedTime;
-            }
-        }
+        public TimeSpan ElapsedTime 
+            => !IsCollecting || WaitUntilKeyPress ? KeysElapsedTime : KeysElapsedTime + LastElapsedTime;
 
         public double CorrectWordPerMinute
         {
@@ -44,36 +37,26 @@ namespace Typing
                 int wordLength = 0;
                 int correctWord = 0;
                 bool isCorrectWord = true;
+
                 for (int i = 0; i < KeyDataList.Count; i++)
                 {
                     KeyData key = KeyDataList[i];
-                    switch (key.Key)
+                    if (key.IsWordSeperator)
                     {
-                        case Key.Space:
-                        case Key.Enter:
-                        case Key.Oem1:
-                        case Key.Oem2:
-                        case Key.Oem7:
-                        case Key.OemComma:
-                        case Key.OemPeriod:
-                            if (wordLength > 0)
-                            {
-                                if (isCorrectWord)
-                                    correctWord++;
-                                else
-                                    isCorrectWord = true;
-                                wordLength = 0;
-                            }
-                            break;
-
-                        default:
-                            if (key.HasKeyChar)
-                            {
-                                if (!key.IsCorrect)
-                                    isCorrectWord = false;
-                                wordLength++;
-                            }
-                            break;
+                        if (wordLength > 0)
+                        {
+                            if (isCorrectWord)
+                                correctWord++;
+                            else
+                                isCorrectWord = true;
+                            wordLength = 0;
+                        }
+                    }
+                    else if (key.HasKeyChar)
+                    {
+                        if (!key.IsCorrect)
+                            isCorrectWord = false;
+                        wordLength++;
                     }
                 }
 
@@ -114,17 +97,35 @@ namespace Typing
         public readonly char KeyChar;
         public readonly bool HasKeyChar;
         public bool IsCorrect;
+        public bool IsWordSeperator
+        {
+            get
+            {
+                switch (Key)
+                {
+                    case Key.Space:
+                    case Key.Enter:
+                    case Key.Oem1:
+                    case Key.Oem2:
+                    case Key.Oem7:
+                    case Key.OemComma:
+                    case Key.OemPeriod:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        }
 
         public KeyData(Key key, KeyboardLayout kl)
         {
             Key = key;
             IsToggled = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.LeftShift) ? Console.CapsLock : !Console.CapsLock;
             char? keyChar = kl.Key2Char(key, IsToggled);
+            
             HasKeyChar = keyChar != null;
             if (HasKeyChar)
                 KeyChar = keyChar.Value;
-            IsCorrect = false;
-
         }
 
     }
