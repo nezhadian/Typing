@@ -20,31 +20,28 @@ namespace Typing.Pages
     /// </summary>
     public partial class FreeModePage : Page
     {
-        #region Useless
-
-        public static readonly DependencyProperty IsGamePausedProperty =
-            DependencyProperty.Register("IsGamePaused", typeof(bool), typeof(FreeModePage), new PropertyMetadata(false));
-
-        public FreeModePage()
-        {
-            InitializeComponent();
-        }
-
-        #endregion
-
         //private 
         KeyboardLayout USKeyboard = new KeyboardLayout();
         StatisticsCalculator Statistics;
         TypingStream TypingStream;
 
+        //Properties
+        bool isGamePaused;
         public bool IsGamePaused
         {
-            get { return (bool)GetValue(IsGamePausedProperty); }
-            set { SetValue(IsGamePausedProperty, value);
+            get => isGamePaused;
+            set {
+                isGamePaused = value;
                 Statistics.IsCollecting = !value;
+                btnPlayPause.IsChecked = value;
             }
         }
 
+        //Initialize
+        public FreeModePage()
+        {
+            InitializeComponent();
+        }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).KeyDown += FreeModePage_KeyDown;
@@ -54,6 +51,7 @@ namespace Typing.Pages
             IsGamePaused = false;
         }
 
+        //Timer
         private void InitTimer()
         {
             DispatcherTimer timer = new DispatcherTimer()
@@ -61,14 +59,15 @@ namespace Typing.Pages
                 Interval = new TimeSpan(0, 0, 1),
                 IsEnabled = true
             };
-            timer.Tick += (s, e) =>
-            {
-                if (Statistics.LastElapsedTime > new TimeSpan(0, 0, 12))
-                    IsGamePaused = true;
+            timer.Tick += Timer_Tick;
+        }
+        private void Timer_Tick(object s,EventArgs e)
+        {
+            if (Statistics.LastElapsedTime > new TimeSpan(0, 0, 12))
+                IsGamePaused = true;
 
-                txtTimer.Text = Statistics.ElapsedTime.ToString("mm':'ss");
-                txtWPM.Text = string.Format("{0:0.00}", Statistics.CorrectWordPerMinute);
-            };
+            txtTimer.Text = Statistics.ElapsedTime.ToString("mm':'ss");
+            txtWPM.Text = string.Format("{0:0.00}", Statistics.CorrectWordPerMinute);
         }
 
         //TypingStream
@@ -105,7 +104,7 @@ namespace Typing.Pages
                     break;
 
                 case Key.Escape:
-                    IsGamePaused = !IsGamePaused;
+                    EscKeyDown();
                     return;
 
                 default:
@@ -115,6 +114,12 @@ namespace Typing.Pages
             }
 
             Statistics.AddKey(key);
+        }
+
+        //Esc Key
+        private void EscKeyDown()
+        {
+            IsGamePaused = !IsGamePaused;
         }
 
         //Enter Key
@@ -208,6 +213,12 @@ namespace Typing.Pages
                 };
                 txtCurrentTypedLine.Inlines.Add(newTextPiece);
             }
+        }
+
+        //Play Pause Button
+        private void btnPlayPause_Click(object sender, RoutedEventArgs e)
+        {
+            EscKeyDown();
         }
     }
 }

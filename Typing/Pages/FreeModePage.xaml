@@ -62,7 +62,7 @@
                 00:00
             </TextBlock>
 
-            <ToggleButton Style="{StaticResource FreeMode.PausePlayButton.Style}" IsChecked="{Binding IsGamePaused,ElementName=main,Mode=TwoWay}"/>
+            <ToggleButton x:Name="btnPlayPause" Style="{StaticResource FreeMode.PausePlayButton.Style}" Click="btnPlayPause_Click"/>
         </Grid>
 
     </Grid>
