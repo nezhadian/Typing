@@ -29,7 +29,7 @@
                 00:00
             </TextBlock>
 
-            <ToggleButton x:Name="btnPlayPause" Style="{StaticResource FreeMode.PausePlayButton.Style}" Click="btnPlayPause_Click"/>
+            <ToggleButton x:Name="btnPlayPause" Style="{StaticResource FreeMode.PausePlayButton.Style}" Click="PausePlay"/>
         </Grid>
 
     </Grid>

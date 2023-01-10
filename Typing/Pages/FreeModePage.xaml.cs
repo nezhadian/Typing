@@ -88,67 +88,50 @@ namespace Typing.Pages
         {
             KeyData key = new KeyData(e.Key, USKeyboard);
 
-            if (key.Key != Key.Escape && IsGamePaused)
-                return;
-
-            switch (e.Key)
+            if (key.Key == Key.Escape)
             {
-                case Key.Escape:
-                    EscKeyDown();
-                    return;
-
-                case Key.Enter:
-                    EnterKeyDown(key);
-                    break;
-
-                default:
-                    if (key.HasKeyChar)
-                        KeyHasCharDown(key);
-                    break;
+                PausePlay(null, null);
             }
-
-            Statistics.AddKey(key);
-        }
-        // Enter Key Down
-        private void EnterKeyDown(KeyData key)
-        {
-            if (TypingStream.IsEndOfLine)
+            else if (!IsGamePaused)
             {
-                bool noNextLine = !TypingStream.GoToNextLine();
-                if (noNextLine)
-                {
-                    IsGamePaused = true;
-                    MessageBox.Show("Congratulations!!! You typed all of text");
-                }
+                if (TypingStream.IsEndOfLine)
+                    GoToNextLine(key);
                 else
-                {
-                    typView.ClearLine();
-                }
-                key.IsCorrect = true;
-            }
-        }
+                    AnyKeyDown(key);
 
-        // Any Key Has Keychar
-        private void KeyHasCharDown(KeyData key)
+                Statistics.AddKey(key);
+            }        
+        }
+        private void GoToNextLine(KeyData key)
         {
-            if (!TypingStream.IsEndOfLine)
+            bool noNextLine = !TypingStream.GoToNextLine();
+            if (noNextLine)
+            {
+                IsGamePaused = true;
+                MessageBox.Show("Congratulations!!! You typed all of text");
+            }
+            else
+            {
+                typView.ClearLine();
+            }
+            key.IsCorrect = key.Key == Key.Enter;
+
+        }
+        private void AnyKeyDown(KeyData key)
+        {
+            if (key.HasKeyChar)
             {
                 key.IsCorrect = TypingStream.IsCorrectChar(key.KeyChar);
                 typView.WriteKeyChar(key);
                 TypingStream.GoToNextChar();
             }
+            
         }
 
-        //Esc Key
-        private void EscKeyDown()
+        //Pause Play Button
+        private void PausePlay(object sender, RoutedEventArgs e)
         {
             IsGamePaused = !IsGamePaused;
-        }
-
-        //Play Pause Button
-        private void btnPlayPause_Click(object sender, RoutedEventArgs e)
-        {
-            EscKeyDown();
         }
     }
 }
