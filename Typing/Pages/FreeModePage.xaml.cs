@@ -23,7 +23,6 @@ namespace Typing.Pages
         //private 
         KeyboardLayout USKeyboard = new KeyboardLayout();
         StatisticsCalculator Statistics;
-        //TypingStream TypingStream;
 
         //Properties
 

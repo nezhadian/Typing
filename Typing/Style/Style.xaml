@@ -3,6 +3,7 @@
     <SolidColorBrush x:Key="PrimaryColor">#0EBE5A</SolidColorBrush>
     <SolidColorBrush x:Key="TextColor">#FFF</SolidColorBrush>
     
+    <!--Main Menu Primary Buttons-->
     <CornerRadius x:Key="MainMenu.CTAButton.CornerRadius">10</CornerRadius>
     <SolidColorBrush x:Key="MainMenu.CTAButton.Hover">#0BDB65</SolidColorBrush>
     <SolidColorBrush x:Key="MainMenu.CTAButton.Pressed">#0E9A4A</SolidColorBrush>
@@ -32,6 +33,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--Main Menu Secondary Buttons-->
 
     <SolidColorBrush x:Key="MainMenu.SecondButton.Normal">#B5FFD5</SolidColorBrush>
     <SolidColorBrush x:Key="MainMenu.SecondButton.Text">#005324</SolidColorBrush>
@@ -64,6 +67,8 @@
         </Setter>
     </Style>
 
+    <!--Main Frame Container-->
+    
     <SolidColorBrush x:Key="Frame.BackButton.Hover">#EEEBEB</SolidColorBrush>
     <SolidColorBrush x:Key="Frame.BackButton.Pressed">#D1D1D1</SolidColorBrush>
     <Style x:Key="FrameBackButtonStyle" TargetType="Button">
@@ -109,7 +114,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <!--Pause Play Button-->
     <SolidColorBrush x:Key="FreeMode.WPMText.TextColor">#00FF6F</SolidColorBrush>
     <SolidColorBrush x:Key="FreeMode.Timer.TextColor">#00672D</SolidColorBrush>
     <SolidColorBrush x:Key="FreeMode.PausePlayButtom.Color">#00672D</SolidColorBrush>
