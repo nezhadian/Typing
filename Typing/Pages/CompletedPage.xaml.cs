@@ -63,10 +63,16 @@ namespace Typing.Pages
         {
             LastWPM = stat.CorrectWordPerMinute;
             Time = stat.KeysElapsedTime;
+
             var wordDetails = stat.WordDetails();
             txtCorrectWords.Text = wordDetails.CorrectWords.ToString();
             txtInCorrectWords.Text = wordDetails.InCorrectWords.ToString();
             txtTotalWords.Text = wordDetails.TotalWords.ToString();
+
+            var charsDetail = stat.CharsDetails();
+            txtCorrectChars.Text = charsDetail.CorrectChars.ToString();
+            txtInCorrectChars.Text = charsDetail.InCorrectChars.ToString();
+            txtTotalChars.Text = charsDetail.CharsCount.ToString();
         }
     }
 }
