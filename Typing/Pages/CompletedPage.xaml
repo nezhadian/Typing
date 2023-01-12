@@ -54,11 +54,17 @@
                 <!--Correct Chars / inCorrect Chars / All Chars-->
                 <Grid>
                     <TextBlock Text="Chars :" TextAlignment="Left" Style="{StaticResource CompletedPage.Details.Title}"/>
-                    <!--<TextBlock TextAlignment="Right" Style="{StaticResource CompletedPage.Details.Info}">
-                        <Run x:Name="rnCorrectChars" Style="{StaticResource CompletedPage.Details.CorrectsRun}">+170</Run>--><!--
-                     --><!--<Run x:Name="rnInCorrectChars" Style="{StaticResource CompletedPage.Details.InCorrectsRun}">-160</Run>
-                        <Run x:Name="rnTotalChars">/330</Run>
-                    </TextBlock>-->
+                    <!--Details-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <!--Corrects-->
+                        <TextBlock x:Name="txtCorrectChars" Text="170" Style="{StaticResource CompletedPage.Details.Correct}"/>
+                        <ContentPresenter Margin="3,0,0,0" Content="{StaticResource checkMark2}"/>
+                        <!--In Corrects-->
+                        <TextBlock x:Name="txtInCorrectChars" Text="160" Margin="7,0,0,0" Style="{StaticResource CompletedPage.Details.InCorrects}"/>
+                        <ContentPresenter Margin="3,0,0,0" Content="{StaticResource xMark2}"/>
+                        <!--Total Chars-->
+                        <TextBlock x:Name="txtTotalChars" Text="330" Margin="7,0,0,0" Style="{StaticResource CompletedPage.Details.Info}"/>
+                    </StackPanel>
                 </Grid>
             </StackPanel>
 
