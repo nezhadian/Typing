@@ -64,9 +64,9 @@ namespace Typing.Pages
             LastWPM = stat.CorrectWordPerMinute;
             Time = stat.KeysElapsedTime;
             var wordDetails = stat.WordDetails();
-            rnCorrectWords.Text = "+" + wordDetails.CorrectWords;
-            rnInCorrectWords.Text = "-" + wordDetails.InCorrectWords;
-            rnTotalWords.Text = "/" + wordDetails.TotalWords;
+            txtCorrectWords.Text = wordDetails.CorrectWords.ToString();
+            txtInCorrectWords.Text = wordDetails.InCorrectWords.ToString();
+            txtTotalWords.Text = wordDetails.TotalWords.ToString();
         }
     }
 }

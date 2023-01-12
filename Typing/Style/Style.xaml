@@ -296,11 +296,11 @@
         <Setter Property="Foreground" Value="{DynamicResource CompletedPage.Details.TitleColor}" />
     </Style>
 
-    <Style x:Key="CompletedPage.Details.CorrectsRun" TargetType="Run">
+    <Style x:Key="CompletedPage.Details.Correct" TargetType="TextBlock" BasedOn="{StaticResource CompletedPage.Details.Info}">
         <Setter Property="Foreground" Value="{DynamicResource CompletedPage.Details.CorrectsColor}" />
     </Style>
 
-    <Style x:Key="CompletedPage.Details.InCorrectsRun" TargetType="Run">
+    <Style x:Key="CompletedPage.Details.InCorrects" TargetType="TextBlock" BasedOn="{StaticResource CompletedPage.Details.Info}">
         <Setter Property="Foreground" Value="{DynamicResource CompletedPage.Details.InCorrectsColor}" />
     </Style>
 

@@ -38,21 +38,27 @@
                 <!--Correct Word / inCorrect Words / All Words-->
                 <Grid>
                     <TextBlock Text="Words :" TextAlignment="Left" Style="{StaticResource CompletedPage.Details.Title}"/>
-                    <TextBlock TextAlignment="Right" Style="{StaticResource CompletedPage.Details.Info}">
-                        <Run x:Name="rnCorrectWords" Style="{StaticResource CompletedPage.Details.CorrectsRun}">+17</Run><!--
-                     --><Run x:Name="rnInCorrectWords" Style="{StaticResource CompletedPage.Details.InCorrectsRun}">-16</Run>
-                        <Run x:Name="rnTotalWords">/33</Run>
-                    </TextBlock>
+                    <!--Details-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <!--Corrects-->
+                        <TextBlock x:Name="txtCorrectWords" Text="17" Style="{StaticResource CompletedPage.Details.Correct}"/>
+                        <ContentPresenter Margin="3,0,0,0" Content="{StaticResource checkMark}"/>
+                        <!--In Corrects-->
+                        <TextBlock x:Name="txtInCorrectWords" Text="16" Margin="7,0,0,0" Style="{StaticResource CompletedPage.Details.InCorrects}"/>
+                        <ContentPresenter Margin="3,0,0,0" Content="{StaticResource xMark}"/>
+                        <!--Total Words-->
+                        <TextBlock x:Name="txtTotalWords" Text="33" Margin="7,0,0,0" Style="{StaticResource CompletedPage.Details.Info}"/>
+                    </StackPanel>
                 </Grid>
 
                 <!--Correct Chars / inCorrect Chars / All Chars-->
                 <Grid>
                     <TextBlock Text="Chars :" TextAlignment="Left" Style="{StaticResource CompletedPage.Details.Title}"/>
-                    <TextBlock TextAlignment="Right" Style="{StaticResource CompletedPage.Details.Info}">
-                        <Run x:Name="rnCorrectChars" Style="{StaticResource CompletedPage.Details.CorrectsRun}">+170</Run><!--
-                     --><Run x:Name="rnInCorrectChars" Style="{StaticResource CompletedPage.Details.InCorrectsRun}">-160</Run>
+                    <!--<TextBlock TextAlignment="Right" Style="{StaticResource CompletedPage.Details.Info}">
+                        <Run x:Name="rnCorrectChars" Style="{StaticResource CompletedPage.Details.CorrectsRun}">+170</Run>--><!--
+                     --><!--<Run x:Name="rnInCorrectChars" Style="{StaticResource CompletedPage.Details.InCorrectsRun}">-160</Run>
                         <Run x:Name="rnTotalChars">/330</Run>
-                    </TextBlock>
+                    </TextBlock>-->
                 </Grid>
             </StackPanel>
 
