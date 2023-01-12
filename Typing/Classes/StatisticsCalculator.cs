@@ -102,6 +102,23 @@ namespace Typing
 
             return (totalWords, correctWords, totalWords - correctWords);
         }
+        internal (int CharsCount, int CorrectChars, int InCorrectChars) CharsDetails()
+        {
+            int correctChars = 0;
+            int totalChars = 0;
+            for (int i = 0; i < KeyDataList.Count; i++)
+            {
+                KeyData key = KeyDataList[i];
+                if (key.HasKeyChar)
+                {
+                    if (key.IsCorrect)
+                        correctChars++;
+                    totalChars++;
+
+                }
+            }
+            return (totalChars, correctChars, totalChars - correctChars);
+        }
 
 
     }
