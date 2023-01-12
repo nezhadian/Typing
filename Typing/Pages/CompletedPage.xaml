@@ -26,8 +26,8 @@
             <Border Background="Gainsboro" Height="170" VerticalAlignment="Bottom" Margin="0,0,0,70"/>
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-            <Button Content="Try More"/>
-            <Button Content="Next" Style="{StaticResource Main.CTAButton}" Margin="20,0,0,0"/>
+            <Button Content="Try More" Style="{StaticResource Main.SecondaryButton}"/>
+            <Button Content="Next" Style="{StaticResource Main.CTAButton}" Margin="15,0,0,0"/>
         </StackPanel>
 
     </Grid>
