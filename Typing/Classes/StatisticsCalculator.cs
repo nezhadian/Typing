@@ -72,9 +72,9 @@ namespace Typing
 
         internal (int Words,int CorrectWords,int InCorrectWords) WordsDetail()
         {
-            int wordLength = 0;
             int correctWords = 0;
             int totalWords = 0;
+            bool isWord = false ;
             bool isCorrectWord = true;
 
             for (int i = 0; i < KeyDataList.Count; i++)
@@ -82,13 +82,13 @@ namespace Typing
                 KeyData key = KeyDataList[i];
                 if (key.IsWordSeperator)
                 {
-                    if (wordLength > 0)
+                    if (isWord)
                     {
                         if (isCorrectWord)
                             correctWords++;
                         else
                             isCorrectWord = true;
-                        wordLength = 0;
+                        isWord = false;
                         totalWords++;
                     }
                 }
@@ -96,7 +96,7 @@ namespace Typing
                 {
                     if (!key.IsCorrect)
                         isCorrectWord = false;
-                    wordLength++;
+                    isWord = true;
                 }
             }
 
@@ -125,22 +125,7 @@ namespace Typing
 
         public bool IsWordSeperator
         {
-            get
-            {
-                switch (Key)
-                {
-                    case Key.Space:
-                    case Key.Enter:
-                    case Key.Oem1:
-                    case Key.Oem2:
-                    case Key.Oem7:
-                    case Key.OemComma:
-                    case Key.OemPeriod:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
+            get => " ,:.?".Contains(CorrectChar);
         }
 
         public KeyData(Key key, KeyboardLayout kl)
@@ -152,9 +137,6 @@ namespace Typing
             HasKeyChar = keyChar != null;
             if (HasKeyChar)
                 KeyChar = keyChar.Value;
-            
-            
-            
         }
 
     }
