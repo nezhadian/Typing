@@ -50,5 +50,10 @@ namespace Typing.Pages
         {
             NavigationService.GoBack();
         }
+
+        public void ReadFromStatisticsCalculator(StatisticsCalculator stat)
+        {
+            
+        }
     }
 }

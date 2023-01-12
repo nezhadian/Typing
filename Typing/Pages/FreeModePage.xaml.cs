@@ -118,7 +118,7 @@ namespace Typing.Pages
             {
                 IsGamePaused = true;
                 CompletedPage completedPage = new CompletedPage();
-                completedPage.LastWPM = Statistics.CorrectWordPerMinute;
+                completedPage.ReadFromStatisticsCalculator(Statistics);
                 NavigationService.Content = completedPage;
             }
             else

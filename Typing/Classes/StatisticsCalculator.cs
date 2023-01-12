@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Typing
 {
-    class StatisticsCalculator
+    public class StatisticsCalculator
     {
         public DateTime LastTime;
         public List<KeyData> KeyDataList = new List<KeyData>();
