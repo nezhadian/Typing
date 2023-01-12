@@ -250,7 +250,7 @@
     <SolidColorBrush x:Key="Main.SecondaryButton.Text">#0EBE5A</SolidColorBrush>
     <SolidColorBrush x:Key="Main.SecondaryButton.Hover">#B8FFD7</SolidColorBrush>
     <SolidColorBrush x:Key="Main.SecondaryButton.Pressed">#A2E3BE</SolidColorBrush>
-    
+
     <Style x:Key="Main.SecondaryButton" TargetType="Button" BasedOn="{StaticResource Main.CTAButton}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Main.SecondaryButton.Text}" />
@@ -267,5 +267,14 @@
         </Style.Triggers>
     </Style>
 
+    <!--Completed Page WPM Style-->
+    <SolidColorBrush x:Key="CompletedPage.WPMText.Color">#00672D</SolidColorBrush> 
+
+    <Style x:Key="CompletedPage.WPMText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="48" />
+        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource CompletedPage.WPMText.Color}" />
+    </Style>
 
 </ResourceDictionary>

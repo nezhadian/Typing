@@ -15,12 +15,12 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid>
-            <StackPanel Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <StackPanel Margin="0,80,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
                 <StackPanel >
-                    <Rectangle Width="30" Height="20" Fill="Red"/>
-                    <TextBlock Text="27" HorizontalAlignment="Center"/>
+                    <ContentPresenter Content="{StaticResource crown}" Margin="0,0,0,-15"/>
+                    <TextBlock Text="27" HorizontalAlignment="Center" Style="{StaticResource CompletedPage.WPMText}"/>
                 </StackPanel>
-            <TextBlock Text="WPM" VerticalAlignment="Bottom"/>
+                <TextBlock Text="WPM" VerticalAlignment="Bottom" Style="{StaticResource CompletedPage.WPMText}" Margin="15,0,0,0"/>
             </StackPanel>
 
             <Border Background="Gainsboro" Height="170" VerticalAlignment="Bottom" Margin="0,0,0,70"/>
