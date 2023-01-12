@@ -75,6 +75,6 @@ namespace Typing
 
         internal void GoToNextChar() => Index++;
 
-        public bool IsCorrectChar(char keychar) => keychar == currentLine[Index];
+        public char CorrectChar => currentLine[Index];
     }
 }

@@ -113,6 +113,16 @@ namespace Typing
         public readonly char KeyChar;
         public readonly bool HasKeyChar;
         public bool IsCorrect;
+
+        private char correctChr;
+        public char CorrectChar
+        {
+            get => correctChr;
+            set { correctChr = value;
+                IsCorrect = CorrectChar == KeyChar;
+            }
+        }
+
         public bool IsWordSeperator
         {
             get
@@ -142,6 +152,9 @@ namespace Typing
             HasKeyChar = keyChar != null;
             if (HasKeyChar)
                 KeyChar = keyChar.Value;
+            
+            
+            
         }
 
     }

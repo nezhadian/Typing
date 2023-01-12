@@ -132,7 +132,7 @@ namespace Typing.Pages
         {
             if (key.HasKeyChar)
             {
-                key.IsCorrect = TypingStream.IsCorrectChar(key.KeyChar);
+                key.CorrectChar = TypingStream.CorrectChar;
                 typView.WriteKeyChar(key);
                 TypingStream.GoToNextChar();
             }
