@@ -277,4 +277,31 @@
         <Setter Property="Foreground" Value="{DynamicResource CompletedPage.WPMText.Color}" />
     </Style>
 
+    <!--Completed Page Game Details-->
+    <SolidColorBrush x:Key="CompletedPage.Details.TitleColor">#00672D</SolidColorBrush> 
+    <SolidColorBrush x:Key="CompletedPage.Details.CorrectsColor">#0EBE5A</SolidColorBrush>
+    <SolidColorBrush x:Key="CompletedPage.Details.InCorrectsColor">#FF0000</SolidColorBrush>
+    <Style x:Key="CompletedPage.Details.Title" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource CompletedPage.Details.TitleColor}" />
+    </Style>
+
+    <Style x:Key="CompletedPage.Details.Info" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource CompletedPage.Details.TitleColor}" />
+    </Style>
+
+    <Style x:Key="CompletedPage.Details.CorrectsRun" TargetType="Run">
+        <Setter Property="Foreground" Value="{DynamicResource CompletedPage.Details.CorrectsColor}" />
+    </Style>
+
+    <Style x:Key="CompletedPage.Details.InCorrectsRun" TargetType="Run">
+        <Setter Property="Foreground" Value="{DynamicResource CompletedPage.Details.InCorrectsColor}" />
+    </Style>
+
 </ResourceDictionary>

@@ -27,27 +27,31 @@
             </StackPanel>
 
             <!--Details Info-->
-            <StackPanel MinWidth="200" HorizontalAlignment="Center">
+            <StackPanel MinWidth="350" HorizontalAlignment="Center">
                 
                 <!--Time-->
                 <Grid>
-                    <TextBlock Text="Time :" TextAlignment="Left"/>
-                    <TextBlock Text="01:43" TextAlignment="Right"/>
+                    <TextBlock Text="Time :" TextAlignment="Left" Style="{StaticResource CompletedPage.Details.Title}"/>
+                    <TextBlock x:Name="txtTime" Text="01:43" TextAlignment="Right" Style="{StaticResource CompletedPage.Details.Title}"/>
                 </Grid>
 
                 <!--Correct Word / inCorrect Words / All Words-->
                 <Grid>
-                    <TextBlock Text="Words :" TextAlignment="Left"/>
-                    <TextBlock TextAlignment="Right">
-                        <Run>+17</Run><Run>-16</Run><Run>/33</Run>
+                    <TextBlock Text="Words :" TextAlignment="Left" Style="{StaticResource CompletedPage.Details.Title}"/>
+                    <TextBlock TextAlignment="Right" Style="{StaticResource CompletedPage.Details.Info}">
+                        <Run x:Name="rnCorrectWords" Style="{StaticResource CompletedPage.Details.CorrectsRun}">+17</Run><!--
+                     --><Run x:Name="rnInCorrectWords" Style="{StaticResource CompletedPage.Details.InCorrectsRun}">-16</Run>
+                        <Run x:Name="rnTotalWords">/33</Run>
                     </TextBlock>
                 </Grid>
 
                 <!--Correct Chars / inCorrect Chars / All Chars-->
                 <Grid>
-                    <TextBlock Text="Chars :" TextAlignment="Left"/>
-                    <TextBlock TextAlignment="Right">
-                        <Run>+170</Run><Run>-160</Run><Run>/330</Run>
+                    <TextBlock Text="Chars :" TextAlignment="Left" Style="{StaticResource CompletedPage.Details.Title}"/>
+                    <TextBlock TextAlignment="Right" Style="{StaticResource CompletedPage.Details.Info}">
+                        <Run x:Name="rnCorrectChars" Style="{StaticResource CompletedPage.Details.CorrectsRun}">+170</Run><!--
+                     --><Run x:Name="rnInCorrectChars" Style="{StaticResource CompletedPage.Details.InCorrectsRun}">-160</Run>
+                        <Run x:Name="rnTotalChars">/330</Run>
                     </TextBlock>
                 </Grid>
             </StackPanel>
