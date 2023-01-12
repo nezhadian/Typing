@@ -41,7 +41,6 @@ namespace Typing.Pages
         }
 
         private TimeSpan time;
-
         public TimeSpan Time
         {
             get => time;
@@ -49,9 +48,6 @@ namespace Typing.Pages
                 txtTime.Text = value.ToString("mm':'ss");
             }
         }
-
-
-
 
         public CompletedPage()
         {
@@ -67,6 +63,10 @@ namespace Typing.Pages
         {
             LastWPM = stat.CorrectWordPerMinute;
             Time = stat.KeysElapsedTime;
+            var wordDetails = stat.WordDetails();
+            rnCorrectWords.Text = "+" + wordDetails.CorrectWords;
+            rnInCorrectWords.Text = "-" + wordDetails.InCorrectWords;
+            rnTotalWords.Text = "/" + wordDetails.TotalWords;
         }
     }
 }
