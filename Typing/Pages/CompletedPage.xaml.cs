@@ -46,9 +46,9 @@ namespace Typing.Pages
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void TryMore_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.RemoveBackEntry();
+            NavigationService.GoBack();
         }
     }
 }
