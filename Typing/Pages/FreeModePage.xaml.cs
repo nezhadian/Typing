@@ -117,7 +117,9 @@ namespace Typing.Pages
             if (noNextLine)
             {
                 IsGamePaused = true;
-                MessageBox.Show("Congratulations!!! You typed all of text");
+                CompletedPage completedPage = new CompletedPage();
+                completedPage.LastWPM = Statistics.CorrectWordPerMinute;
+                NavigationService.Content = completedPage;
             }
             else
             {
