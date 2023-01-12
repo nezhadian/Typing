@@ -8,7 +8,27 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="CompletedPage">
 
-    <Grid>
-        
+    <Grid Margin="80,0,80,40">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+                <StackPanel >
+                    <Rectangle Width="30" Height="20" Fill="Red"/>
+                    <TextBlock Text="27" HorizontalAlignment="Center"/>
+                </StackPanel>
+            <TextBlock Text="WPM" VerticalAlignment="Bottom"/>
+            </StackPanel>
+
+            <Border Background="Gainsboro" Height="170" VerticalAlignment="Bottom" Margin="0,0,0,70"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <Button Content="Try More"/>
+            <Button Content="Next"/>
+        </StackPanel>
+
     </Grid>
 </Page>
