@@ -34,7 +34,7 @@ namespace Typing
         {
             get
             {
-                var wordsDetail = WordsDetail();
+                var wordsDetail = WordDetails();
 
                 double divisor = (WaitUntilKeyPress ? KeysElapsedTime : ElapsedTime).TotalSeconds / 60;
                 return wordsDetail.CorrectWords != 0 ? wordsDetail.CorrectWords / divisor : 0;
@@ -70,7 +70,7 @@ namespace Typing
             KeyDataList.Clear();
         }
 
-        internal (int Words,int CorrectWords,int InCorrectWords) WordsDetail()
+        internal (int TotalWords,int CorrectWords,int InCorrectWords) WordDetails()
         {
             int correctWords = 0;
             int totalWords = 0;
