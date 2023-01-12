@@ -8,14 +8,17 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="CompletedPage">
 
-    <Grid Margin="80,0,80,40">
-
+    <Grid Margin="80,50,80,40">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Grid>
-            <StackPanel Margin="0,80,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+        
+        <!--Upper Content-->
+        <StackPanel >
+            <!--WPM Title Text-->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
                 <StackPanel >
                     <ContentPresenter x:Name="svgCrown" Content="{StaticResource crown}" Margin="0,0,0,-15"/>
                     <TextBlock x:Name="txtLastWPM" Text="27" HorizontalAlignment="Center" Style="{StaticResource CompletedPage.WPMText}"/>
@@ -23,9 +26,39 @@
                 <TextBlock Text="WPM" VerticalAlignment="Bottom" Style="{StaticResource CompletedPage.WPMText}" Margin="15,0,0,0"/>
             </StackPanel>
 
-            <Border Background="Gainsboro" Height="170" VerticalAlignment="Bottom" Margin="0,0,0,70"/>
-        </Grid>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <!--Details Info-->
+            <StackPanel MinWidth="200" HorizontalAlignment="Center">
+                
+                <!--Time-->
+                <Grid>
+                    <TextBlock Text="Time :" TextAlignment="Left"/>
+                    <TextBlock Text="01:43" TextAlignment="Right"/>
+                </Grid>
+
+                <!--Correct Word / inCorrect Words / All Words-->
+                <Grid>
+                    <TextBlock Text="Words :" TextAlignment="Left"/>
+                    <TextBlock TextAlignment="Right">
+                        <Run>+17</Run><Run>-16</Run><Run>/33</Run>
+                    </TextBlock>
+                </Grid>
+
+                <!--Correct Chars / inCorrect Chars / All Chars-->
+                <Grid>
+                    <TextBlock Text="Chars :" TextAlignment="Left"/>
+                    <TextBlock TextAlignment="Right">
+                        <Run>+170</Run><Run>-160</Run><Run>/330</Run>
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+
+        </StackPanel>
+        
+        <!--History Statistics--> 
+        <Border Grid.Row="1" Background="Gainsboro" Height="170" VerticalAlignment="Bottom" Margin="0,0,0,20"/>
+        
+        <!--Buttons-->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
             <Button Content="Try More" Click="TryMore_Click" Style="{StaticResource Main.SecondaryButton}"/>
             <Button Content="Next" Style="{StaticResource Main.CTAButton}" Margin="15,0,0,0"/>
         </StackPanel>
