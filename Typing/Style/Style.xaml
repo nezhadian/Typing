@@ -247,13 +247,11 @@
     </Style>
 
     <!--Secondary Button-->
-    <SolidColorBrush x:Key="Main.SecondaryButton.Primary">#0EBE5A</SolidColorBrush>
-    <SolidColorBrush x:Key="Main.SecondaryButton.Text">#0EBE5A</SolidColorBrush>
     <SolidColorBrush x:Key="Main.SecondaryButton.Border">#0EBE5A</SolidColorBrush>
-
+    <SolidColorBrush x:Key="Main.SecondaryButton.Text">#0EBE5A</SolidColorBrush>
     <SolidColorBrush x:Key="Main.SecondaryButton.Hover">#B8FFD7</SolidColorBrush>
-    <SolidColorBrush x:Key="Main.SecondaryButton.HoverText">#0EBE5A</SolidColorBrush>
     <SolidColorBrush x:Key="Main.SecondaryButton.Pressed">#A2E3BE</SolidColorBrush>
+    
     <Style x:Key="Main.SecondaryButton" TargetType="Button" BasedOn="{StaticResource Main.CTAButton}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Main.SecondaryButton.Text}" />
@@ -263,7 +261,6 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Main.SecondaryButton.Hover}" />
-                <Setter Property="Foreground" Value="{DynamicResource Main.SecondaryButton.HoverText}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Main.SecondaryButton.Pressed}" />
