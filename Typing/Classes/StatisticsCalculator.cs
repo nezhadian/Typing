@@ -34,34 +34,10 @@ namespace Typing
         {
             get
             {
-                int wordLength = 0;
-                int correctWord = 0;
-                bool isCorrectWord = true;
-
-                for (int i = 0; i < KeyDataList.Count; i++)
-                {
-                    KeyData key = KeyDataList[i];
-                    if (key.IsWordSeperator)
-                    {
-                        if (wordLength > 0)
-                        {
-                            if (isCorrectWord)
-                                correctWord++;
-                            else
-                                isCorrectWord = true;
-                            wordLength = 0;
-                        }
-                    }
-                    else if (key.HasKeyChar)
-                    {
-                        if (!key.IsCorrect)
-                            isCorrectWord = false;
-                        wordLength++;
-                    }
-                }
+                var wordsDetail = WordsDetail();
 
                 double divisor = (WaitUntilKeyPress ? KeysElapsedTime : ElapsedTime).TotalSeconds / 60;
-                return correctWord != 0 ? correctWord / divisor : 0;
+                return wordsDetail.CorrectWords != 0 ? wordsDetail.CorrectWords / divisor : 0;
             }
         }
 
@@ -92,6 +68,39 @@ namespace Typing
         internal void ClearAll()
         {
             KeyDataList.Clear();
+        }
+
+        internal (int Words,int CorrectWords,int InCorrectWords) WordsDetail()
+        {
+            int wordLength = 0;
+            int correctWords = 0;
+            int totalWords = 0;
+            bool isCorrectWord = true;
+
+            for (int i = 0; i < KeyDataList.Count; i++)
+            {
+                KeyData key = KeyDataList[i];
+                if (key.IsWordSeperator)
+                {
+                    if (wordLength > 0)
+                    {
+                        if (isCorrectWord)
+                            correctWords++;
+                        else
+                            isCorrectWord = true;
+                        wordLength = 0;
+                        totalWords++;
+                    }
+                }
+                else if (key.HasKeyChar)
+                {
+                    if (!key.IsCorrect)
+                        isCorrectWord = false;
+                    wordLength++;
+                }
+            }
+
+            return (totalWords, correctWords, totalWords - correctWords);
         }
 
 
