@@ -141,7 +141,6 @@
     <!--Pause Play Button-->
     <SolidColorBrush x:Key="FreeMode.WPMText.TextColor">#00FF6F</SolidColorBrush>
     <SolidColorBrush x:Key="FreeMode.Timer.TextColor">#00672D</SolidColorBrush>
-    <SolidColorBrush x:Key="FreeMode.PausePlayButtom.Color">#00672D</SolidColorBrush>
     <Style x:Key="FreeMode.PausePlayButton.Style" TargetType="ToggleButton">
         <Setter Property="Width" Value="50" />
         <Setter Property="Height" Value="50" />
