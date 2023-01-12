@@ -20,6 +20,27 @@ namespace Typing.Pages
     /// </summary>
     public partial class CompletedPage : Page
     {
+        bool isBstScr;
+        public bool IsBestScore
+        {
+            get => isBstScr;
+            set
+            {
+                isBstScr = value;
+                svgCrown.Visibility = (isBstScr) ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        private double lstWPM;
+        public double LastWPM
+        {
+            get => lstWPM;
+            set { lstWPM = value;
+                txtLastWPM.Text = string.Format("{0:0}", value);
+            }
+        }
+
+
         public CompletedPage()
         {
             InitializeComponent();
