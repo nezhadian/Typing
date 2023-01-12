@@ -68,7 +68,6 @@
     </Style>
 
     <!--Main Frame Container-->
-    
     <SolidColorBrush x:Key="Frame.BackButton.Hover">#EEEBEB</SolidColorBrush>
     <SolidColorBrush x:Key="Frame.BackButton.Pressed">#D1D1D1</SolidColorBrush>
     <Style x:Key="FrameBackButtonStyle" TargetType="Button">
@@ -114,7 +113,31 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <!--Pages Styles-->
+    <SolidColorBrush x:Key="Pages.TitleText">#009A42</SolidColorBrush>
+    <Style x:Key="TitledPageStyle" TargetType="Page" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Page">
+                    <Grid>
+                        <ContentPresenter />
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="50">
+                            <TextBlock 
+                                FontFamily="Poppins"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource Pages.TitleText}"
+                                Text="{TemplateBinding Title}" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--Pause Play Button-->
     <SolidColorBrush x:Key="FreeMode.WPMText.TextColor">#00FF6F</SolidColorBrush>
     <SolidColorBrush x:Key="FreeMode.Timer.TextColor">#00672D</SolidColorBrush>
