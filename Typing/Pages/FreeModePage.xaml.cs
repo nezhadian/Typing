@@ -85,11 +85,8 @@ namespace Typing.Pages
         }
         private void Timer_Tick(object s,EventArgs e)
         {
-            if (Statistics.LastElapsedTime > new TimeSpan(0, 0, 12))
-            {
+            if (!Statistics.WaitUntilKeyPress && Statistics.LastElapsedTime > new TimeSpan(0, 0, 12))
                 IsGamePaused = true;
-                Statistics.LastTime = DateTime.Now;
-            }
 
             txtTimer.Text = Statistics.ElapsedTime.ToString("mm':'ss");
             txtWPM.Text = string.Format("{0:0.00}", Statistics.CorrectWordPerMinute);
