@@ -20,6 +20,7 @@ namespace Typing
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static NavigationService NavigationService => ((MainWindow)Application.Current.MainWindow).frmMain.NavigationService;
         public MainWindow()
         {
             InitializeComponent();

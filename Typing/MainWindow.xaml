@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:Typing"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
-    <Frame Style="{StaticResource MainFrameStyle}" NavigationUIVisibility="Visible" Source="/Pages/MainPage.xaml"/>
+    <Frame x:Name="frmMain" Style="{StaticResource MainFrameStyle}" NavigationUIVisibility="Visible" Source="/Pages/MainPage.xaml"/>
 </Window>

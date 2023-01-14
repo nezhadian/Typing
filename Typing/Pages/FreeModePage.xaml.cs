@@ -122,7 +122,7 @@ namespace Typing.Pages
                 IsGamePaused = true;
                 CompletedPage completedPage = new CompletedPage();
                 completedPage.ReadFromStatisticsCalculator(Statistics);
-                NavigationService.Content = completedPage;
+                MainWindow.NavigationService.Content = completedPage;
             }
             else
             {
